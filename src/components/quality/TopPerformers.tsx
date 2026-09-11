@@ -1,6 +1,6 @@
-import { SectionCard } from "../SectionCard";
-import { Sparkline } from "../Sparkline";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
+import { SectionCard } from "../operations/SectionCard";
+import { Sparkline } from "../operations/Sparkline";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
 const rankTone = ["bg-[var(--color-accent)] text-white", "bg-[var(--color-accent-soft)] text-[var(--color-accent)]"];
 

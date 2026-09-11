@@ -1,6 +1,6 @@
-import { InsightCard } from "../InsightCard";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
-import type { InsightCardData } from "../../../types/operations";
+import { InsightCard } from "../operations/InsightCard";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
+import type { InsightCardData } from "../../types/operations";
 
 export function QualityInsights() {
   const { insights } = useQualityPerformance();

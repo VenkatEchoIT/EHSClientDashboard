@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { KPICard } from "../KPICard";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
-import type { KPICardData } from "../../../types/operations";
+import { KPICard } from "../operations/KPICard";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
+import type { KPICardData } from "../../types/operations";
 
 function delta(current: number, prev: number, unit: "pts" | "count" | "pct") {
   const diff = Number((current - prev).toFixed(1));
@@ -26,7 +26,7 @@ export function QualityKPIGrid() {
         tone: "accent",
         visual: "bar",
         barValue: kpis.passRate,
-        footnote: [{ label: "Target", value: "95%" }],
+        target: 95,
       },
       {
         id: "first-pass-accuracy",
@@ -37,13 +37,14 @@ export function QualityKPIGrid() {
         tone: "amber",
         visual: "bar",
         barValue: kpis.firstPassAccuracy,
-        footnote: [{ label: "Target", value: "95%" }],
+        target: 95,
       },
       {
         id: "rework-rate",
         label: "Rework rate",
         value: `${kpis.reworkRate}%`,
         trend: delta(kpis.reworkRate, kpis.prev.reworkRate, "pts"),
+        trendTone: "success",
         sparkline: [8.5, 8.1, 7.9, 7.6, 7.2, 7.0, kpis.reworkRate],
         tone: "amber",
         visual: "sparkline",
@@ -72,6 +73,7 @@ export function QualityKPIGrid() {
         value: kpis.chartsAudited.toLocaleString(),
         trend: delta(kpis.chartsAudited, kpis.prev.chartsAudited, "count"),
         tone: "accent",
+        trendTone: "success",
         visual: "none",
         footnote: [{ label: "Audits pending", value: `${kpis.auditsPending}` }],
       },

@@ -6,7 +6,7 @@ import { DashboardFooter } from "../components/operations/DashboardFooter";
 import { KPIGrid } from "../components/operations/KPIGrid";
 import { OperationalInsights } from "../components/operations/OperationalInsights";
 import { OperationsHeader } from "../components/operations/OperationsHeader";
-import { QualityPerformance } from "../components/operations/quality/QualityPerformance";
+import { QualityPerformance } from "../components/quality/QualityPerformance";
 import { ReassignmentRate } from "../components/operations/ReassignmentRate";
 import { TurnaroundTime } from "../components/operations/TurnaroundTime";
 import { WorkloadByPriority } from "../components/operations/WorkloadByPriority";

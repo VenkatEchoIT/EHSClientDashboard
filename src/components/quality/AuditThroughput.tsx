@@ -1,7 +1,7 @@
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { SectionCard } from "../SectionCard";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
-import type { WeekdayThroughput } from "../../../types/qualityPerformance";
+import { SectionCard } from "../operations/SectionCard";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
+import type { WeekdayThroughput } from "../../types/qualityPerformance";
 
 const FULL_DAY_NAME: Record<string, string> = {
   Mon: "Monday",

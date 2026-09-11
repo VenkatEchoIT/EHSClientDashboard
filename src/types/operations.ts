@@ -14,6 +14,8 @@ export interface KPICardData {
   trend?: Trend;
   sparkline?: number[];
   tone: KPITone;
+  trendTone?: KPITone;
+  target?: number;
   footnote?: { label: string; value: string }[];
   visual?: "sparkline" | "donut" | "bar" | "none";
   donutValue?: number; // 0-100, used when visual === "donut"

@@ -1,7 +1,7 @@
 import { CartesianGrid, Label, ReferenceArea, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
-import { SectionCard } from "../SectionCard";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
-import type { AccuracyCategory, DailyMetric } from "../../../types/qualityPerformance";
+import { SectionCard } from "../operations/SectionCard";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
+import type { AccuracyCategory, DailyMetric } from "../../types/qualityPerformance";
 
 const categoryMeta: Record<AccuracyCategory, { color: string; label: string }> = {
   "at-above": { color: "#1f9254", label: "At / above target" },

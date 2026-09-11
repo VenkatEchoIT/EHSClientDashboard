@@ -1,9 +1,9 @@
 import { CheckCircle2, Clock, FileCheck2, HelpCircle } from "lucide-react";
 import type { ReactNode } from "react";
-import { SectionCard } from "../SectionCard";
-import { TrendTag } from "../TrendTag";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
-import type { Trend } from "../../../types/operations";
+import { SectionCard } from "../operations/SectionCard";
+import { TrendTag } from "../operations/TrendTag";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
+import type { Trend } from "../../types/operations";
 
 function InnerCard({
   icon,

@@ -1,5 +1,5 @@
-import { QualityPerformanceProvider } from "../../../context/QualityPerformanceContext";
-import type { DateFilterKey } from "../../../types/operations";
+import { QualityPerformanceProvider } from "../../context/QualityPerformanceContext";
+import type { DateFilterKey } from "../../types/operations";
 import { AccuracyDistribution } from "./AccuracyDistribution";
 import { AuditPerformance } from "./AuditPerformance";
 import { AuditThroughput } from "./AuditThroughput";

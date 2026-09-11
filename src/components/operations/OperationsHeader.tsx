@@ -45,10 +45,10 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
     <div className="rounded-3xl border border-[var(--color-border-soft)] bg-[var(--color-surface-tint)] px-5 py-5 sm:px-7 sm:py-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-sm font-medium text-[var(--color-ink-soft)]">Client Name</p>
+          <p className="text-md font-medium text-[var(--color-ink-soft)]">Client Name</p>
           <p className="text-sm text-[var(--color-ink-muted)]">Multi-specialty – Inpatient &amp; Outpatient coding</p>
           <h1 className="mt-3 text-[28px] font-semibold tracking-tight text-[var(--color-ink)]">{copy.title}</h1>
-          <p className="mt-1 text-sm text-[var(--color-ink-muted)]">{copy.subtitle}</p>
+          <p className="mt-0 text-md text-[rgb(23,10,3)]">{copy.subtitle}</p>
         </div>
 
         <div className="flex items-center gap-3">

@@ -1,6 +1,6 @@
 import { Bar, BarChart, CartesianGrid, Cell, Label, LabelList, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { SectionCard } from "../SectionCard";
-import { useQualityPerformance } from "../../../context/QualityPerformanceContext";
+import { SectionCard } from "../operations/SectionCard";
+import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
 const barColors = ["#d9481f", "#f0975a", "#eba91f", "#f6cf8d", "#e8631f"];
 
