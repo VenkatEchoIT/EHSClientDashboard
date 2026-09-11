@@ -1,0 +1,88 @@
+export type TrendDirection = "up" | "down" | "flat";
+
+export interface Trend {
+  direction: TrendDirection;
+  label: string;
+}
+
+export type KPITone = "accent" | "amber" | "success" | "info" | "neutral";
+
+export interface KPICardData {
+  id: string;
+  label: string;
+  value: string;
+  trend?: Trend;
+  sparkline?: number[];
+  tone: KPITone;
+  footnote?: { label: string; value: string }[];
+  visual?: "sparkline" | "donut" | "bar" | "none";
+  donutValue?: number; // 0-100, used when visual === "donut"
+  barValue?: number; // 0-100, used when visual === "bar"
+}
+
+export type PipelineTone = "neutral" | "accent" | "amber" | "info" | "success" | "danger";
+
+export interface PipelineStageData {
+  id: string;
+  label: string;
+  value: number;
+  percentLabel: string;
+  tone: PipelineTone;
+}
+
+export interface DailyThroughputPoint {
+  day: string;
+  date: string;
+  received: number;
+  completed: number;
+}
+
+export interface TurnaroundStage {
+  id: string;
+  label: string;
+  days: number;
+  maxDays: number;
+}
+
+export interface ChartAgingBucket {
+  bucket: string;
+  count: number;
+  warning?: boolean;
+}
+
+export interface PriorityDatum {
+  id: string;
+  label: string;
+  count: number;
+  percent: number;
+  color: string;
+}
+
+export interface TeamWorkloadRow {
+  id: string;
+  team: string;
+  assigned: number;
+  inProgress: number;
+  completed: number;
+  backlog: number;
+  avatarTone: "accent" | "amber" | "info";
+}
+
+export interface InsightCardData {
+  id: string;
+  icon: "clock" | "alertTriangle" | "shieldCheck" | "trendingUp" | "calendar" | "inbox";
+  label: string;
+  value: string;
+  supporting: string;
+  trend?: Trend;
+  tone: "accent" | "amber" | "success" | "info" | "danger";
+}
+
+export type DateFilterKey = "today" | "7d" | "30d" | "month" | "custom";
+
+export interface DateFilterOption {
+  key: DateFilterKey;
+  label: string;
+}
+
+export type DashboardTab = "operations" | "quality";
