@@ -18,7 +18,7 @@ export function Operations() {
   const [tab, setTab] = useState<DashboardTab>("operations");
 
   return (
-    <div className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+    <div className="w-full mx-auto max-w-[1820px] px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
       <div className="flex flex-col gap-6">
         <OperationsHeader
           dateFilter={dateFilter}

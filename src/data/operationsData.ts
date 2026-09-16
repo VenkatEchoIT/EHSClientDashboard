@@ -96,13 +96,76 @@ export const kpiData: KPICardData[] = [
 ];
 
 export const pipelineData: PipelineStageData[] = [
-  { id: "unallocated", label: "Unallocated", value: 96, percentLabel: "2.8%", tone: "neutral" },
-  { id: "open", label: "Open", value: 224, percentLabel: "6.4%", tone: "accent" },
-  { id: "in-progress", label: "In Progress", value: 318, percentLabel: "9.1%", tone: "amber" },
-  { id: "pending-clarification", label: "Pending Clarification", value: 142, percentLabel: "4.1%", tone: "amber" },
-  { id: "qa-review", label: "QA Review", value: 186, percentLabel: "5.3%", tone: "danger" },
-  { id: "re-assigned", label: "Re-Assigned", value: 58, percentLabel: "1.7%", tone: "amber" },
-  { id: "completed", label: "Completed", value: 2458, percentLabel: "70.6%", tone: "success" },
+  {
+    id: "unallocated",
+    label: "Unallocated",
+    value: 96,
+    percentLabel: "2.8%",
+    trend: {
+      direction: "up",
+    },
+    tone: "neutral",
+  },
+  {
+    id: "open",
+    label: "Open",
+    value: 224,
+    percentLabel: "6.4%",
+    trend: {
+      direction: "up",
+    },
+    tone: "accent",
+  },
+  {
+    id: "in-progress",
+    label: "In Progress",
+    value: 318,
+    percentLabel: "9.1%",
+    trend: {
+      direction: "up",
+    },
+    tone: "amber",
+  },
+  {
+    id: "pending-clarification",
+    label: "Pending Clarification",
+    value: 142,
+    percentLabel: "4.1%",
+    trend: {
+      direction: "down",
+    },
+    tone: "amber",
+  },
+  {
+    id: "qa-review",
+    label: "QA Review",
+    value: 186,
+    percentLabel: "5.3%",
+    trend: {
+      direction: "up",
+    },
+    tone: "danger",
+  },
+  {
+    id: "re-assigned",
+    label: "Re-Assigned",
+    value: 58,
+    percentLabel: "1.7%",
+    trend: {
+      direction: "down",
+    },
+    tone: "amber",
+  },
+  {
+    id: "completed",
+    label: "Completed",
+    value: 2458,
+    percentLabel: "70.6%",
+    trend: {
+      direction: "up",
+    },
+    tone: "success",
+  },
 ];
 
 export const dailyThroughputData: DailyThroughputPoint[] = [
@@ -163,7 +226,7 @@ export const insightData: InsightCardData[] = [
     label: "Current Bottleneck",
     value: "Coding",
     supporting: "2.4 days",
-    trend: { direction: "up", label: "18% vs prev" },
+    trend: { direction: "up", label: "18% vs prev"},
     tone: "danger",
   },
   {
@@ -182,14 +245,14 @@ export const insightData: InsightCardData[] = [
     value: "94.6%",
     supporting: "",
     trend: { direction: "up", label: "2.1 pts vs prev" },
-    tone: "success",
+    tone: "accent",
   },
   {
     id: "avg-daily",
     icon: "trendingUp",
     label: "Avg. Daily Completed",
     value: "102",
-    supporting: "Charts",
+    supporting: "Charts per day",
     trend: { direction: "up", label: "12 vs prev" },
     tone: "success",
   },
@@ -197,8 +260,8 @@ export const insightData: InsightCardData[] = [
     id: "peak-day",
     icon: "calendar",
     label: "Peak Day",
-    value: "658 Charts",
-    supporting: "30 Aug 2023",
+    value: "30 Aug 2023",
+    supporting: "658 Charts",
     tone: "info",
   },
   {
@@ -208,6 +271,6 @@ export const insightData: InsightCardData[] = [
     value: "482",
     supporting: "",
     trend: { direction: "up", label: "36 vs prev" },
-    tone: "accent",
+    tone: "alert",
   },
 ];

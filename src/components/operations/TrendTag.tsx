@@ -14,7 +14,7 @@ const colorByDirection: Record<Trend["direction"], string> = {
 
 export function TrendTag({ trend, size = "sm" }: TrendTagProps) {
   const Icon = trend.direction === "down" ? ArrowDown : ArrowUp;
-  const textSize = size === "sm" ? "text-xs" : "text-sm";
+  const textSize = size === "sm" ? "text-sm" : "text-base";
 
   return (
     <span

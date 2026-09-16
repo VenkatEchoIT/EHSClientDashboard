@@ -1,17 +1,22 @@
 @import "tailwindcss";
-
+/* @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap'); */
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  --color-ink: #24211d;
-  --color-ink-soft: #57534e;
+  --color-red: #AE380F;
+  --color-primary: #F26230;
+  --color-secondary: #EAA323;
+
+
+  --color-ink: #1B1C1C;
+  --color-ink-soft: #59413A;
   --color-ink-muted: #8a847c;
 
   --color-surface: #ffffff;
-  --color-surface-tint: #fbf5ee;
+  --color-surface-tint: #AE380F0D;
   --color-page: #fefcfa;
 
-  --color-border-soft: #ece5db;
+  --color-border-soft: rgba(174, 56, 15, 0.2);
   --color-border-strong: #e2d9cb;
 
   --color-accent: #e8631f;
@@ -24,8 +29,8 @@
   --color-success: #1f9254;
   --color-success-soft: #e6f5ec;
 
-  --color-danger: #d9481f;
-  --color-danger-soft: #fdeae1;
+  --color-danger: #FF0000;
+  --color-danger-soft: #FFF0F0;
 
   --color-info: #3f6fd1;
   --color-info-soft: #eaf0fb;

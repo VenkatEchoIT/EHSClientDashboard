@@ -58,8 +58,8 @@ export function KPICard({ data }: KPICardProps) {
     <div className="flex min-w-[190px] flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 shadow-[0_1px_2px_rgba(36,33,29,0.04)] transition-shadow hover:shadow-[0_2px_10px_rgba(36,33,29,0.06)]">
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-sm text-[var(--color-ink-soft)]">{data.label}</p>
-          <p className="mt-1.5 text-[26px] font-semibold leading-none tracking-tight text-[var(--color-ink)]">
+          <p className="text-sm font-regular text-ink-soft">{data.label}</p>
+          <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
             {data.value}
           </p>
           {data.trend && (
@@ -74,13 +74,34 @@ export function KPICard({ data }: KPICardProps) {
       </div>
 
       {data.footnote && data.footnote.length > 0 && (
-        <div className="mt-3 flex items-center gap-4 text-xs text-[var(--color-ink-muted)]">
-          {data.footnote.map((item, i) => (
-            <span key={i}>
+        <div
+    className={`mt-4 ${
+      data.id === "sla-compliance"
+        ? "border-t border-[var(--color-border-soft)]"
+        : ""
+    }`}
+  >
+        <div
+      className={`mt-3 text-[14px] text-[var(--color-ink-muted)] ${
+        data.footnote.length > 1
+          ? "flex items-start gap-8"
+          : "flex items-center gap-1"
+      }`}
+    >
+      {data.footnote.map((item, i) => (
+        <span
+          key={i}
+          className={
+            data.footnote!.length > 1
+              ? "flex flex-col"
+              : "flex items-center gap-1"
+          }
+        >
               {item.label && <span className="mr-1">{item.label}</span>}
-              <span className="font-semibold text-[var(--color-ink)]">{item.value}</span>
+              <span className="font-semibold text-ink">{item.value}</span>
             </span>
           ))}
+        </div>
         </div>
       )}
 

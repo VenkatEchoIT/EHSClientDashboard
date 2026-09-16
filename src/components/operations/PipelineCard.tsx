@@ -9,6 +9,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { PipelineStageData, PipelineTone } from "../../types/operations";
+import { TrendTag } from "./TrendTag";
 
 const iconByStage: Record<string, LucideIcon> = {
   unallocated: Layers,
@@ -67,13 +68,33 @@ export function PipelineCard({ stage }: { stage: PipelineStageData }) {
     <div
       className={`flex min-w-[150px] flex-1 flex-col gap-3 rounded-2xl border ${tone.border} ${tone.bg} px-4 py-4`}
     >
+      {/* Icon + TrendTag */}
       <div className="flex items-center justify-between">
-        <Icon className={`h-4 w-4 ${tone.icon}`} strokeWidth={2} aria-hidden="true" />
-        <span className="text-xs font-medium text-[var(--color-ink-soft)]">~ {stage.percentLabel}</span>
+        <Icon
+          className={`h-6 w-6 ${tone.icon}`}
+          strokeWidth={2}
+          aria-hidden="true"
+        />
+
+        {stage.trend && (
+          <TrendTag
+            trend={{
+              direction: stage.trend.direction,
+              label: stage.percentLabel,
+            }}
+          />
+        )}
       </div>
+
+      {/* Value + Label */}
       <div>
-        <p className={`text-2xl font-semibold leading-none ${tone.text}`}>{stage.value.toLocaleString()}</p>
-        <p className="mt-1.5 text-xs text-[var(--color-ink-soft)]">{stage.label}</p>
+        <p className={`text-2xl font-semibold leading-none ${tone.text}`}>
+          {stage.value.toLocaleString()}
+        </p>
+
+        <p className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
+          {stage.label}
+        </p>
       </div>
     </div>
   );
