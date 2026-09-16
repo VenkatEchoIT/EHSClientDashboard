@@ -51,7 +51,7 @@ export function AuditPerformance() {
     <QualitySectionCard title="Audit Performance" subtitle="Overview of audit team performance">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <InnerCard
-          icon={<CheckCircle2 className="h-4 w-4 text-[var(--color-info)]" strokeWidth={2} aria-hidden="true" />}
+          icon={<CheckCircle2 className="h-6 w-6 text-[var(--color-info)]" strokeWidth={2} aria-hidden="true" />}
           bg="bg-[var(--color-info-soft)]"
           label="Audits completed"
           value={kpis.chartsAudited.toLocaleString()}
@@ -59,7 +59,7 @@ export function AuditPerformance() {
           trend={trendFor(kpis.chartsAudited, kpis.prev.chartsAudited, "count")}
         />
         <InnerCard
-          icon={<HelpCircle className="h-4 w-4 text-[var(--color-amber)]" strokeWidth={2} aria-hidden="true" />}
+          icon={<HelpCircle className="h-6 w-6 text-[var(--color-amber)]" strokeWidth={2} aria-hidden="true" />}
           bg="bg-[var(--color-amber-soft)]"
           label="Audits pending"
           value={`${kpis.auditsPending}`}
@@ -67,7 +67,7 @@ export function AuditPerformance() {
           trend={trendFor(kpis.auditsPending, kpis.prev.auditsPending, "count")}
         />
         <InnerCard
-          icon={<Clock className="h-4 w-4 text-[var(--color-danger)]" strokeWidth={2} aria-hidden="true" />}
+          icon={<Clock className="h-6 w-6 text-[var(--color-danger)]" strokeWidth={2} aria-hidden="true" />}
           bg="bg-[var(--color-danger-soft)]"
           label="Avg. Audit Time"
           value={`${kpis.avgAuditTimeDays}`}
@@ -75,7 +75,7 @@ export function AuditPerformance() {
           trend={trendFor(kpis.avgAuditTimeDays, kpis.prev.avgAuditTimeDays, "pts")}
         />
         <InnerCard
-          icon={<FileCheck2 className="h-4 w-4 text-[var(--color-success)]" strokeWidth={2} aria-hidden="true" />}
+          icon={<FileCheck2 className="h-6 w-6 text-[var(--color-success)]" strokeWidth={2} aria-hidden="true" />}
           bg="bg-[var(--color-success-soft)]"
           label="First-pass Accuracy"
           value={`${kpis.firstPassAccuracy}%`}

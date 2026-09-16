@@ -24,11 +24,11 @@ export function QualityBySpecialty() {
             <tr className="border-b border-[var(--color-border-soft)] text-left text-[var(--color-ink-muted)]">
               <th className="py-2 pr-3 font-medium">Specialty</th>
               <th className="py-2 pr-3 text-right font-medium">Charts Audited</th>
-              <th className="py-2 pr-3 text-right font-medium">Pass rate</th>
+              <th className="whitespace-nowrap py-2 pr-3 text-right font-medium">Pass rate</th>
               <th className="py-2 pr-3 text-right font-medium">Failed</th>
               <th className="py-2 pr-3 text-right font-medium">First-pass accuracy</th>
-              <th className="py-2 pr-3 text-right font-medium">Rework rate</th>
-              <th className="py-2 pr-3 text-right font-medium">Trend (vs prev)</th>
+              <th className="whitespace-nowrap py-2 pr-3 text-right font-medium">Rework rate</th>
+              <th className="whitespace-nowrap py-2 pr-3 text-right font-medium">Trend (vs prev)</th>
             </tr>
           </thead>
           <tbody>

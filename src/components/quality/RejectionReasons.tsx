@@ -9,7 +9,6 @@ export function RejectionReasons() {
 
   return (
     <QualitySectionCard title="Why charts were returned or rejected" subtitle="Breakdown of rejection reasons">
-      <div className="-mt-3 mb-8 border-b border-[var(--color-border-soft)]" />
         <div className="flex flex-col gap-4">
           {rejectionReasons.map((item, index) => (
             <div key={item.reason} className="flex items-center gap-3">

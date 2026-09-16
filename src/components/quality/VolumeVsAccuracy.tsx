@@ -11,7 +11,7 @@ const categoryMeta: Record<AccuracyCategory, { color: string; label: string }> =
 
 function LegendDot({ color, label }: { color: string; label: string }) {
   return (
-    <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-ink-soft)]">
+    <span className="inline-flex items-center gap-1.5 text-sm text-[var(--color-ink-soft)]">
       <span className="h-2 w-2 rounded-full" style={{ backgroundColor: color }} aria-hidden="true" />
       {label}
     </span>
@@ -57,26 +57,23 @@ export function VolumeVsAccuracy() {
     <QualitySectionCard
       title="Volume vs Accuracy"
       subtitle="Volume of charts Audited vs accuracy score"
-      action={
-        <div className="flex flex-wrap items-center gap-3">
-          {(Object.keys(categoryMeta) as AccuracyCategory[]).map((key) => (
-            <LegendDot key={key} color={categoryMeta[key].color} label={categoryMeta[key].label} />
-          ))}
-        </div>
-      }
+      legend={(Object.keys(categoryMeta) as AccuracyCategory[]).map((key) => (
+        <LegendDot key={key} color={categoryMeta[key].color} label={categoryMeta[key].label} />
+      ))}
     >
       <div className="h-72 w-full" role="img" aria-label="Scatter chart of charts audited versus accuracy">
         <ResponsiveContainer width="100%" height="100%">
           <ScatterChart margin={{ top: 16, right: 16, left: -8, bottom: 8 }}>
-            <CartesianGrid stroke="var(--color-border-soft)" />
+            <CartesianGrid horizontal vertical={false} stroke="var(--color-border-soft)" />
             <XAxis
               type="number"
               dataKey="chartsAudited"
               name="Charts Audited"
-              domain={[0, 130]}
+              domain={[0, 125]}
+              ticks={[0, 25, 50, 75, 100, 125]}
               tickLine={false}
               axisLine={false}
-              tick={{ fontSize: 12, fill: "var(--color-ink-muted)" }}
+              tick={{ fontSize: 13, fill: "var(--color-ink-muted)" }}
               label={{ value: "Charts Audited", position: "insideBottom", offset: -4, fontSize: 12, fill: "var(--color-ink-muted)" }}
             />
             <YAxis
@@ -84,17 +81,44 @@ export function VolumeVsAccuracy() {
               dataKey="passRate"
               name="Accuracy"
               domain={[70, 100]}
+              ticks={[70, 75, 80, 85, 90, 95, 100]}
               tickFormatter={(v) => `${v}%`}
               tickLine={false}
               axisLine={false}
-              tick={{ fontSize: 12, fill: "var(--color-ink-muted)" }}
+              tick={{ fontSize: 13, fill: "var(--color-ink-muted)" }}
             />
-            <ReferenceArea x1={0} x2={30} y1={70} y2={92} fill="var(--color-danger-soft)" fillOpacity={0.5}>
+            <ReferenceArea
+                x1={0}
+                x2={25}
+                y1={70}
+                y2={100}
+                fill="var(--color-danger-soft)"
+                fillOpacity={0.8}
+                stroke="var(--color-danger)"
+                strokeDasharray="3 3"
+                strokeOpacity={0.5}
+              >
+                <Label
+                  position="insideLeft"
+                  fill="var(--color-danger)"
+                  fontSize={10}
+                />
               <Label
-                value={"Low volume\n(accuracy may vary)"}
-                position="insideTopLeft"
-                fill="var(--color-danger)"
-                fontSize={10}
+                content={({ viewBox }) => {
+                  const { x = 0, y = 0, width = 0 } = viewBox as {
+                    x?: number;
+                    y?: number;
+                    width?: number;
+                    height?: number;
+                  };
+                  const centerX = x + width / 2;
+                  return (
+                    <text x={centerX} y={y + 20} textAnchor="middle" fontSize={11} fontWeight={600} fill="#AE380F">
+                      <tspan x={centerX} dy="140">Low volume</tspan>
+                      <tspan x={centerX} dy="14">(accuracy may vary)</tspan>
+                    </text>
+                  );
+                }}
               />
             </ReferenceArea>
             <Tooltip cursor={{ strokeDasharray: "4 4" }} content={<CustomTooltip />} />
