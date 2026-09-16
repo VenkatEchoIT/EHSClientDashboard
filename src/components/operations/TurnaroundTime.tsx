@@ -28,7 +28,7 @@ export function TurnaroundTime() {
       <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[var(--color-border-soft)] pt-4 text-sm">
         <div className="flex items-center gap-2">
           <span className="text-[var(--color-ink-muted)]">Current bottleneck</span>
-          <span className="inline-flex items-center rounded-full bg-[var(--color-accent-soft)] px-3 py-1 text-xs font-semibold text-[var(--color-accent)]">
+          <span className="inline-flex items-center rounded-full bg-[var(--color-accent-soft)] px-3 py-1 text-sm font-semibold text-[var(--color-accent)]">
             {turnaroundBottleneck.label} ({turnaroundBottleneck.days})
           </span>
         </div>

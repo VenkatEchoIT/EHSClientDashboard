@@ -45,14 +45,14 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
     <div className="rounded-3xl border border-[var(--color-border-soft)] bg-[var(--color-surface-tint)] px-5 py-5 sm:px-7 sm:py-6">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
-          <p className="text-md font-medium text-[var(--color-ink-soft)]">Client Name</p>
-          <p className="text-sm text-[var(--color-ink-muted)]">Multi-specialty – Inpatient &amp; Outpatient coding</p>
-          <h1 className="mt-3 text-[28px] font-semibold tracking-tight text-[var(--color-ink)]">{copy.title}</h1>
-          <p className="mt-0 text-md text-[rgb(23,10,3)]">{copy.subtitle}</p>
+          <p className="text-[16px] font-medium text-ink-soft">Client Name</p>
+          <p className="text-[16px] text-ink-muted">Multi-specialty – Inpatient &amp; Outpatient coding</p>
+          <h1 className="mt-3 text-[28px] font-semibold tracking-tight text-ink">{copy.title}</h1>
+          <p className="text-[18px] text-ink-soft">{copy.subtitle}</p>
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 text-sm text-[var(--color-ink-soft)]">
+          <span className="inline-flex items-center gap-1.5 text-[16px] text-[var(--color-ink-soft)]">
             <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" aria-hidden="true" />
             Last updated: {lastUpdated}
           </span>
@@ -68,7 +68,7 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
             <button
               type="button"
               onClick={handleExport}
-              className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-4 py-2 text-sm font-medium text-[var(--color-ink)] hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+              className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-4 py-2 text-[16px] font-medium text-ink-soft hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
             >
               Export
               <Upload className="h-4 w-4" strokeWidth={2} aria-hidden="true" />

@@ -36,7 +36,7 @@ export function WorkloadByTeam() {
             <tr className="border-b border-[var(--color-border-soft)] text-left text-[var(--color-ink-muted)]">
               <th className="py-2 pr-3 font-medium">Team</th>
               {columns.map((column) => (
-                <th key={column.key} className="py-2 pr-3 text-right font-medium">
+                <th key={column.key} className="py-2 pr-3 text-right font-  ">
                   {column.label}
                 </th>
               ))}

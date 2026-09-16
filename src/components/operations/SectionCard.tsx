@@ -15,8 +15,8 @@ export function SectionCard({ title, subtitle, action, children, className = "" 
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-[var(--color-ink)]">{title}</h2>
-          {subtitle && <p className="mt-0.5 text-sm text-[var(--color-ink-muted)]">{subtitle}</p>}
+          <h2 className="text-[22px] font-semibold text-[var(--color-ink)]">{title}</h2>
+          {subtitle && <p className="mt-0.5 text-[18px] text-[var(--color-ink-muted)]">{subtitle}</p>}
         </div>
         {action}
       </div>

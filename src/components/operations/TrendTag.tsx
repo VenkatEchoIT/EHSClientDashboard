@@ -13,30 +13,9 @@ const colorByDirection: Record<Trend["direction"], string> = {
   flat: "text-[var(--color-ink-muted)]",
 };
 
-const colorByTone: Record<KPITone, string> = {
-  accent: "text-[var(--color-accent)]",
-  amber: "text-[var(--color-amber)]",
-  success: "text-[var(--color-success)]",
-  info: "text-[var(--color-info)]",
-  neutral: "text-[var(--color-ink-muted)]",
-};
-
-export function TrendTag({
-  trend,
-  tone,
-  size = "sm",
-}: TrendTagProps) {
-  const Icon =
-    trend.direction === "down"
-      ? ArrowDown
-      : ArrowUp;
-
-  const textSize =
-    size === "sm" ? "text-xs" : "text-sm";
-
-  const colorClass = tone
-    ? colorByTone[tone]
-    : colorByDirection[trend.direction];
+export function TrendTag({ trend, size = "sm" }: TrendTagProps) {
+  const Icon = trend.direction === "down" ? ArrowDown : ArrowUp;
+  const textSize = size === "sm" ? "text-sm" : "text-base";
 
   return (
     <span

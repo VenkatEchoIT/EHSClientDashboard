@@ -5,7 +5,7 @@ import { SectionCard } from "./SectionCard";
 export function WorkloadByPriority() {
   return (
     <SectionCard title="Workload by Priority" subtitle="Distribution of open charts by priority">
-      <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10">
+      <div className="mt-15 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10">
         <div className="relative h-52 w-52 shrink-0" role="img" aria-label={`Donut chart of ${priorityTotal} open charts by priority`}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>

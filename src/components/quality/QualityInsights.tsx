@@ -50,7 +50,7 @@ export function QualityInsights() {
 
   return (
     <section>
-      <h2 className="text-xs font-semibold tracking-wide text-[var(--color-ink-muted)]">QUALITY INSIGHTS</h2>
+      <h2 className="text-[18px] font-semibold tracking-wide text-[var(--color-ink-muted)]">QUALITY INSIGHTS</h2>
       <p className="mt-1 text-sm text-[var(--color-ink-muted)]">Key takeaways for this period</p>
       <div className="mt-4 grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-5">
         {cards.map((insight) => (

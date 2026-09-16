@@ -29,6 +29,9 @@ export interface PipelineStageData {
   label: string;
   value: number;
   percentLabel: string;
+  trend?: {
+    direction: "up" | "down";   
+  };
   tone: PipelineTone;
 }
 
@@ -77,7 +80,7 @@ export interface InsightCardData {
   value: string;
   supporting: string;
   trend?: Trend;
-  tone: "accent" | "amber" | "success" | "info" | "danger";
+  tone: "accent" | "amber" | "success" | "info" | "danger" | "alert";
 }
 
 export type DateFilterKey = "today" | "7d" | "30d" | "month" | "custom";

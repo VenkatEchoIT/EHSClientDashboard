@@ -2,6 +2,8 @@ import { pipelineData } from "../../data/operationsData";
 import { PipelineCard } from "./PipelineCard";
 import { SectionCard } from "./SectionCard";
 
+
+
 export function ChartPipeline() {
   return (
     <SectionCard title="Chart Pipeline" subtitle="Where every chart is in the workflow">
