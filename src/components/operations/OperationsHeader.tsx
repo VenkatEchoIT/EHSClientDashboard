@@ -42,17 +42,17 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
   }
 
   return (
-    <div className="rounded-3xl border border-[var(--color-border-soft)] bg-[var(--color-surface-tint)] px-5 py-5 sm:px-7 sm:py-6">
-      <div className="flex flex-wrap items-start justify-between gap-4">
+    <div className="rounded-3xl border border-[var(--color-border-soft)] bg-[var(--color-surface-tint)] px-4 py-4 sm:px-6 sm:py-5 lg:px-7 lg:py-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <p className="text-[16px] font-medium text-ink-soft">Client Name</p>
-          <p className="text-[16px] text-ink-muted">Multi-specialty – Inpatient &amp; Outpatient coding</p>
-          <h1 className="mt-3 text-[28px] font-semibold tracking-tight text-ink">{copy.title}</h1>
-          <p className="text-[18px] text-ink-soft">{copy.subtitle}</p>
+          <p className="text-sm font-medium text-ink-soft sm:text-base">Client Name</p>
+          <p className="text-sm text-ink-muted sm:text-base">Multi-specialty – Inpatient &amp; Outpatient coding</p>
+          <h1 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-[28px]">{copy.title}</h1>
+          <p className="text-sm text-ink-soft sm:text-base">{copy.subtitle}</p>
         </div>
 
-        <div className="flex items-center gap-3">
-          <span className="inline-flex items-center gap-1.5 text-[16px] text-[var(--color-ink-soft)]">
+        <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-start sm:gap-3">
+          <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-ink-soft)] sm:text-sm">
             <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" aria-hidden="true" />
             Last updated: {lastUpdated}
           </span>
@@ -60,15 +60,15 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
             type="button"
             onClick={handleRefresh}
             aria-label="Refresh dashboard data"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--color-border-soft)] bg-[var(--color-surface)] text-[var(--color-ink-soft)] hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-border-soft)] bg-[var(--color-surface)] text-[var(--color-ink-soft)] hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] sm:h-9 sm:w-9"
           >
-            <RefreshCw className={`h-4 w-4 ${isRefreshing ? "animate-spin" : ""}`} strokeWidth={2} />
+            <RefreshCw className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${isRefreshing ? "animate-spin" : ""}`} />
           </button>
           <div className="relative">
             <button
               type="button"
               onClick={handleExport}
-              className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-4 py-2 text-[16px] font-medium text-ink-soft hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+              className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-3 py-2 text-sm font-medium text-ink-soft hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] sm:gap-2 sm:px-4 sm:text-base"
             >
               Export
               <Upload className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
@@ -85,7 +85,7 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
         </div>
       </div>
 
-      <div className="mt-5 flex flex-wrap items-center justify-between gap-3">
+      <div className="mt-4 flex flex-col gap-3 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <DateFilters selected={dateFilter} onSelect={onDateFilterChange} />
         <DashboardTabs selected={tab} onSelect={onTabChange} />
       </div>

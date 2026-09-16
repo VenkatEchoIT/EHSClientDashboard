@@ -58,6 +58,21 @@ const toneClasses: Record<PipelineTone, { bg: string; border: string; text: stri
     text: "text-[var(--color-ink)]",
     icon: "text-[var(--color-success)]",
   },
+ darkyellow: {
+  bg: "bg-[#FFF7EB]",
+  border: "border-[#9C5905]/20",
+  text: "text-[var(--color-ink)]",
+  icon: "text-[#9C5905]",
+},
+
+reassigned: {
+  bg: "bg-[#FFFBE4]",
+  border: "border-[#BF9C0F]/20",
+  text: "text-[var(--color-ink)]",
+  icon: "text-[#BF9C0F]",
+},
+
+
 };
 
 export function PipelineCard({ stage }: { stage: PipelineStageData }) {
