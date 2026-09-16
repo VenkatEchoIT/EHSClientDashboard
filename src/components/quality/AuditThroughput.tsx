@@ -54,8 +54,8 @@ export function AuditThroughput() {
   return (
     <QualitySectionCard
       title="Audit Throughput & Backlog"
-      action={
-        <div className="flex items-center gap-4">
+      legend={
+        <div className="flex w-full flex-wrap justify-end gap-4">
           <LegendDot color="#1f9254" label="Charts Audited" />
           <LegendDot color="#eba91f" label="Pending Queue" />
         </div>

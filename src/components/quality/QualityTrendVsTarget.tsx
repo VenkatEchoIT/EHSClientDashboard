@@ -63,18 +63,13 @@ export function QualityTrendVsTarget() {
             />
 
             <YAxis
-              domain={[0, 100]}
-              ticks={[0, 80, 90, 100]}
-              tickFormatter={(value) =>
-                value === 0 ? "0" : `${value}%`
-              }
+              domain={[75, 100]}
+              ticks={[80, 90, 100]}
+              tickFormatter={(value) => `${value}%`}
               tickLine={false}
               axisLine={false}
-              tick={{
-                fontSize: 14,
-                fill: "#8da1bd",
-              }}
-              width={55}
+              tick={{ fontSize: 14, fill: "#8da1bd", fontWeight: 500 }}
+              width={52}
             />
 
             <Tooltip
