@@ -78,59 +78,25 @@ export function KPICard({ data }: KPICardProps) {
   const isOpenBacklog = data.id === "open-backlog";
 
   return (
-    <div className="flex min-w-[190px] flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 shadow-[0_1px_2px_rgba(36,33,29,0.20)] transition-shadow hover:shadow-[0_2px_10px_rgba(36,33,29,0.06)]">
-      {/* Completion Rate */}
-      {isCompletionRate ? (
-        <>
-          <div>
-            <p className="text-sm font-regular text-ink-soft">
-              {data.label}
-            </p>
-
-            <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
-              {data.value}
-            </p>
-
-            {data.trend && (
-              <div className="mt-2">
-                <TrendTag
-                  trend={data.trend}
-                  tone={data.trendTone ?? data.tone}
-                />
-              </div>
-            )}
-          </div>
-
-          <div className="mt-auto flex justify-center pt-5">
-            {data.donutValue !== undefined && (
-              <DonutVisual
-                value={data.donutValue}
-                tone={data.tone}
+<div className="flex min-w-0 flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 transition-shadow hover:shadow-[0_4px_12px_rgba(36,33,29,0.10)]">      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-sm font-regular text-ink-soft">{data.label}</p>
+          <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
+            {data.value}
+          </p>
+          {data.trend && (
+            <div className="mt-2">
+              <TrendTag
+                trend={data.trend}
+                tone={data.trendTone ?? data.tone}
               />
-            )}
-          </div>
-        </>
-      ) : isSlaCompliance ? (
-        <>
-          {/* SLA Compliance*/}
-          <div>
-            <p className="text-sm font-regular text-ink-soft">
-              {data.label}
-            </p>
-
-            <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
-              {data.value}
-            </p>
-
-            {data.trend && (
-              <div className="mt-2">
-                <TrendTag
-                  trend={data.trend}
-                  tone={data.trendTone ?? data.tone}
-                />
-              </div>
-            )}
-          </div>
+            </div>
+          )}
+        </div>
+        {data.visual === "donut" && data.donutValue !== undefined && (
+          <DonutVisual value={data.donutValue} tone={data.tone} />
+        )}
+      </div>
 
           {data.footnote && data.footnote.length > 0 && (
             <div className="mt-auto border-t border-[var(--color-border-soft)] pt-3">
@@ -229,6 +195,9 @@ export function KPICard({ data }: KPICardProps) {
                         </span>
                       )}
 
+          
+        </div>
+      )}
                       <span className="font-semibold text-[var(--color-ink)]">
                         {item.value}
                       </span>

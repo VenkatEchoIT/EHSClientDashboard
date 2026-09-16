@@ -135,7 +135,7 @@ export const pipelineData: PipelineStageData[] = [
     trend: {
       direction: "down",
     },
-    tone: "amber",
+    tone: "darkyellow",
   },
   {
     id: "qa-review",
@@ -155,7 +155,7 @@ export const pipelineData: PipelineStageData[] = [
     trend: {
       direction: "down",
     },
-    tone: "amber",
+    tone: "reassigned",
   },
   {
     id: "completed",
