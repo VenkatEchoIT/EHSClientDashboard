@@ -89,7 +89,6 @@ export function KPICard({ data }: KPICardProps) {
             {data.footnote[0].value}
           </span>
         </div>
-        </div>
       )}
 
       {data.sparkline && (

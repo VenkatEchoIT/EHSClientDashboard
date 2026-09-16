@@ -13,9 +13,22 @@ const colorByDirection: Record<Trend["direction"], string> = {
   flat: "text-[var(--color-ink-muted)]",
 };
 
-export function TrendTag({ trend, size = "sm" }: TrendTagProps) {
-  const Icon = trend.direction === "down" ? ArrowDown : ArrowUp;
-  const textSize = size === "sm" ? "text-sm" : "text-base";
+export function TrendTag({
+  trend,
+  size = "sm",
+}: TrendTagProps) {
+  const Icon =
+    trend.direction === "down"
+      ? ArrowDown
+      : ArrowUp;
+
+  const textSize =
+    size === "sm"
+      ? "text-sm"
+      : "text-base";
+
+  const colorClass =
+    colorByDirection[trend.direction];
 
   return (
     <span
@@ -26,6 +39,7 @@ export function TrendTag({ trend, size = "sm" }: TrendTagProps) {
         strokeWidth={2.5}
         aria-hidden="true"
       />
+
       {trend.label}
     </span>
   );
