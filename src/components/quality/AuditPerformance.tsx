@@ -1,9 +1,9 @@
 import { CheckCircle2, Clock, FileCheck2, HelpCircle } from "lucide-react";
 import type { ReactNode } from "react";
-import { SectionCard } from "../operations/SectionCard";
-import { TrendTag } from "../operations/TrendTag";
+import { QualitySectionCard } from "./QualitySectionCard";
+import { TrendTag } from "./TrendTag";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
-import type { Trend } from "../../types/operations";
+import type { Trend } from "../../types/qualityPerformance";
 
 function InnerCard({
   icon,
@@ -48,7 +48,7 @@ export function AuditPerformance() {
   const { kpis } = useQualityPerformance();
 
   return (
-    <SectionCard title="Audit Performance" subtitle="Overview of audit team performance">
+    <QualitySectionCard title="Audit Performance" subtitle="Overview of audit team performance">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <InnerCard
           icon={<CheckCircle2 className="h-4 w-4 text-[var(--color-info)]" strokeWidth={2} aria-hidden="true" />}
@@ -82,6 +82,6 @@ export function AuditPerformance() {
           trend={trendFor(kpis.firstPassAccuracy, kpis.prev.firstPassAccuracy, "pts")}
         />
       </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }

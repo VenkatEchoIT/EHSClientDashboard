@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import { KPICard } from "../operations/KPICard";
+import { QualityKPICard } from "./QualityKPICard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
-import type { KPICardData } from "../../types/operations";
+import type { QualityKPICardData } from "../../types/qualityPerformance";
 
 function delta(current: number, prev: number, unit: "pts" | "count" | "pct") {
   const diff = Number((current - prev).toFixed(1));
@@ -15,7 +15,7 @@ function delta(current: number, prev: number, unit: "pts" | "count" | "pct") {
 export function QualityKPIGrid() {
   const { kpis } = useQualityPerformance();
 
-  const cards: KPICardData[] = useMemo(
+  const cards: QualityKPICardData[] = useMemo(
     () => [
       {
         id: "pass-rate",
@@ -84,7 +84,7 @@ export function QualityKPIGrid() {
   return (
     <div className="-mx-4 flex gap-3.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-3 xl:grid-cols-6">
       {cards.map((card) => (
-        <KPICard key={card.id} data={card} />
+        <QualityKPICard key={card.id} data={card} />
       ))}
     </div>
   );

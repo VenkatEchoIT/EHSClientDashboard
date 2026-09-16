@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { SectionCard } from "../operations/SectionCard";
+import { QualitySectionCard } from "./QualitySectionCard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 import type { WeekdayThroughput } from "../../types/qualityPerformance";
 
@@ -52,7 +52,7 @@ export function AuditThroughput() {
   const bestDay = [...weeklyThroughput].sort((a, b) => b.passRate - a.passRate)[0];
 
   return (
-    <SectionCard
+    <QualitySectionCard
       title="Audit Throughput & Backlog"
       action={
         <div className="flex items-center gap-4">
@@ -92,6 +92,6 @@ export function AuditThroughput() {
           </p>
         </div>
       </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }

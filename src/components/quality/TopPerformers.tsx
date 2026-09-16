@@ -1,5 +1,5 @@
-import { SectionCard } from "../operations/SectionCard";
-import { Sparkline } from "../operations/Sparkline";
+import { QualitySectionCard } from "./QualitySectionCard";
+import { Sparkline } from "./Sparkline";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
 const rankTone = ["bg-[var(--color-accent)] text-white", "bg-[var(--color-accent-soft)] text-[var(--color-accent)]"];
@@ -8,7 +8,7 @@ export function TopPerformers() {
   const { topPerformers } = useQualityPerformance();
 
   return (
-    <SectionCard
+    <QualitySectionCard
       title="Top performers"
       subtitle="Highest quality performers (by pass rate)"
       action={
@@ -54,6 +54,6 @@ export function TopPerformers() {
           </tbody>
         </table>
       </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }

@@ -50,8 +50,9 @@ export const kpiData: KPICardData[] = [
     label: "Open Backlog",
     value: "482",
     trend: { direction: "down", label: "36 vs prev" },
+    sparkline: [420, 435, 428, 450, 440, 465, 452, 470, 458, 482],
     tone: "neutral",
-    visual: "none",
+    visual: "sparkline",
     footnote: [{ label: "Overdue", value: "138" }],
   },
   {
@@ -91,7 +92,7 @@ export const kpiData: KPICardData[] = [
     tone: "accent",
     visual: "bar",
     barValue: 82,
-    footnote: [{ label: "", value: "1,240 / 1,500 charts" }],
+    footnote: [{ label: "", value: "1,240 / 1,500", unit: "charts" }],
   },
 ];
 

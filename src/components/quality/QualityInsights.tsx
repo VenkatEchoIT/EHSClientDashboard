@@ -1,11 +1,11 @@
-import { InsightCard } from "../operations/InsightCard";
+import { QualityInsightCard } from "./QualityInsightCard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
-import type { InsightCardData } from "../../types/operations";
+import type { QualityInsightCardData } from "../../types/qualityPerformance";
 
 export function QualityInsights() {
   const { insights } = useQualityPerformance();
 
-  const cards: InsightCardData[] = [
+  const cards: QualityInsightCardData[] = [
     {
       id: "quality-vs-target",
       icon: "shieldCheck",
@@ -54,7 +54,7 @@ export function QualityInsights() {
       <p className="mt-1 text-sm text-[var(--color-ink-muted)]">Key takeaways for this period</p>
       <div className="mt-4 grid grid-cols-2 gap-3.5 sm:grid-cols-3 lg:grid-cols-5">
         {cards.map((insight) => (
-          <InsightCard key={insight.id} data={insight} />
+          <QualityInsightCard key={insight.id} data={insight} />
         ))}
       </div>
     </section>

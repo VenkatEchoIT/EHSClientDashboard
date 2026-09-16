@@ -1,12 +1,12 @@
-import { SectionCard } from "../operations/SectionCard";
-import { Sparkline } from "../operations/Sparkline";
+import { QualitySectionCard } from "./QualitySectionCard";
+import { Sparkline } from "./Sparkline";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
 export function QualityBySpecialty() {
   const { specialtyStats } = useQualityPerformance();
 
   return (
-    <SectionCard
+    <QualitySectionCard
       title="Quality by Specialty"
       subtitle="Quality performance by medical specialty"
       action={
@@ -50,6 +50,6 @@ export function QualityBySpecialty() {
           </tbody>
         </table>
       </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }

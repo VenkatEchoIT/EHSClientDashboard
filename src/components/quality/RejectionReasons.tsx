@@ -1,4 +1,4 @@
-import { SectionCard } from "../operations/SectionCard";
+import { QualitySectionCard } from "./QualitySectionCard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
 const barColors = ["#e8631f", "#f0975a", "#eba91f", "#f6cf8d", "#e2d9cb"];
@@ -8,7 +8,7 @@ export function RejectionReasons() {
   const maxCount = Math.max(...rejectionReasons.map((r) => r.count), 1) * 1.15;
 
   return (
-    <SectionCard title="Why charts were returned or rejected" subtitle="Breakdown of rejection reasons">
+    <QualitySectionCard title="Why charts were returned or rejected" subtitle="Breakdown of rejection reasons">
       <div className="-mt-3 mb-8 border-b border-[var(--color-border-soft)]" />
         <div className="flex flex-col gap-4">
           {rejectionReasons.map((item, index) => (
@@ -41,6 +41,6 @@ export function RejectionReasons() {
           <span className="text-[var(--color-ink-muted)]">Total</span>
           <span className="ml-2 font-semibold text-[var(--color-ink)]">{kpis.failedAuditChecks}</span>
         </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }

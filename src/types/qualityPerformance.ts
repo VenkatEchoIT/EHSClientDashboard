@@ -63,6 +63,31 @@ export interface CurrentQueueSnapshot {
 
 export type QualityKPITone = "accent" | "amber" | "success" | "info" | "neutral";
 
+export interface QualityKPICardData {
+  id: string;
+  label: string;
+  value: string;
+  trend?: Trend;
+  sparkline?: number[];
+  tone: QualityKPITone;
+  trendTone?: QualityKPITone;
+  target?: number;
+  footnote?: { label: string; value: string }[];
+  visual?: "sparkline" | "donut" | "bar" | "none";
+  donutValue?: number; // 0-100, used when visual === "donut"
+  barValue?: number; // 0-100, used when visual === "bar"
+}
+
+export interface QualityInsightCardData {
+  id: string;
+  icon: "clock" | "alertTriangle" | "shieldCheck" | "trendingUp" | "calendar" | "inbox";
+  label: string;
+  value: string;
+  supporting: string;
+  trend?: Trend;
+  tone: "accent" | "amber" | "success" | "info" | "danger" | "alert";
+}
+
 export interface QualityDataSnapshot {
   auditRecords: AuditRecord[];
   coders: CoderRecord[];

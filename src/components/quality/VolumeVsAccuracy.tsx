@@ -1,5 +1,5 @@
 import { CartesianGrid, Label, ReferenceArea, ResponsiveContainer, Scatter, ScatterChart, Tooltip, XAxis, YAxis } from "recharts";
-import { SectionCard } from "../operations/SectionCard";
+import { QualitySectionCard } from "./QualitySectionCard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 import type { AccuracyCategory, DailyMetric } from "../../types/qualityPerformance";
 
@@ -54,7 +54,7 @@ export function VolumeVsAccuracy() {
   };
 
   return (
-    <SectionCard
+    <QualitySectionCard
       title="Volume vs Accuracy"
       subtitle="Volume of charts Audited vs accuracy score"
       action={
@@ -104,6 +104,6 @@ export function VolumeVsAccuracy() {
           </ScatterChart>
         </ResponsiveContainer>
       </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }

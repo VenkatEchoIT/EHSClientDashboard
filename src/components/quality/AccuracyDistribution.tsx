@@ -1,5 +1,5 @@
 import { Bar, BarChart, CartesianGrid, Cell, Label, LabelList, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { SectionCard } from "../operations/SectionCard";
+import { QualitySectionCard } from "./QualitySectionCard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
 const barColors = ["#d9481f", "#f0975a", "#eba91f", "#f6cf8d", "#e8631f"];
@@ -8,7 +8,7 @@ export function AccuracyDistribution() {
   const { accuracyDistribution } = useQualityPerformance();
 
   return (
-    <SectionCard title="First-Pass Accuracy Distribution" subtitle="Distribution of coders by first-pass accuracy">
+    <QualitySectionCard title="First-Pass Accuracy Distribution" subtitle="Distribution of coders by first-pass accuracy">
       <div className="h-72 w-full" role="img" aria-label="Bar chart of coders by first-pass accuracy bucket">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={accuracyDistribution} margin={{ top: 28, right: 8, left: -12, bottom: 0 }}>
@@ -32,6 +32,6 @@ export function AccuracyDistribution() {
           </BarChart>
         </ResponsiveContainer>
       </div>
-    </SectionCard>
+    </QualitySectionCard>
   );
 }
