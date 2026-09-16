@@ -78,29 +78,66 @@ export function KPICard({ data }: KPICardProps) {
   const isOpenBacklog = data.id === "open-backlog";
 
   return (
-<div className="flex min-w-0 flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 transition-shadow hover:shadow-[0_4px_12px_rgba(36,33,29,0.10)]">      <div className="flex items-start justify-between gap-3">
-        <div>
-          <p className="text-sm font-regular text-ink-soft">{data.label}</p>
-          <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
-            {data.value}
-          </p>
-          {data.trend && (
-            <div className="mt-2">
-              <TrendTag
-                trend={data.trend}
-                tone={data.trendTone ?? data.tone}
-              />
-            </div>
-          )}
-        </div>
-        {data.visual === "donut" && data.donutValue !== undefined && (
-          <DonutVisual value={data.donutValue} tone={data.tone} />
-        )}
-      </div>
+    <div className="flex min-w-0 flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 transition-shadow hover:shadow-[0_4px_12px_rgba(36,33,29,0.10)]">
 
+      {/* Completion Rate */}
+      {isCompletionRate ? (
+        <>
+          <div>
+            <p className="text-sm font-regular text-ink-soft">
+              {data.label}
+            </p>
+
+            <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
+              {data.value}
+            </p>
+
+            {data.trend && (
+              <div className="mt-2">
+                <TrendTag
+                  trend={data.trend}
+                  tone={data.trendTone ?? data.tone}
+                />
+              </div>
+            )}
+          </div>
+
+          <div className="mt-auto flex justify-center pt-5">
+            {data.donutValue !== undefined && (
+              <DonutVisual
+                value={data.donutValue}
+                tone={data.tone}
+              />
+            )}
+          </div>
+        </>
+      ) : isSlaCompliance ? (
+        <>
+          {/* SLA Compliance */}
+          <div>
+            <p className="text-sm font-regular text-ink-soft">
+              {data.label}
+            </p>
+
+            <p className="mt-1.5 text-[26px] font-bold leading-none tracking-tight text-ink">
+              {data.value}
+            </p>
+
+            {data.trend && (
+              <div className="mt-2">
+                <TrendTag
+                  trend={data.trend}
+                  tone={data.trendTone ?? data.tone}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* SLA Footnotes */}
           {data.footnote && data.footnote.length > 0 && (
             <div className="mt-auto border-t border-[var(--color-border-soft)] pt-3">
               <div className="grid grid-cols-2 gap-4">
+
                 {data.footnote.map((item, i) => (
                   <div
                     key={i}
@@ -117,13 +154,14 @@ export function KPICard({ data }: KPICardProps) {
                     </span>
                   </div>
                 ))}
+
               </div>
             </div>
           )}
         </>
       ) : (
         <>
-          {/* All other cards - unchanged */}
+          {/* All Other Cards */}
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-sm font-regular text-ink-soft">
@@ -153,7 +191,7 @@ export function KPICard({ data }: KPICardProps) {
               )}
           </div>
 
-          {/* Open Backlog only: sparkline*/}
+          {/* Open Backlog */}
           {isOpenBacklog ? (
             <>
               {data.sparkline && (
@@ -178,6 +216,7 @@ export function KPICard({ data }: KPICardProps) {
                       <span className="font-semibold text-[var(--color-ink)]">
                         {item.value}
                       </span>
+                      
                     </span>
                   ))}
                 </div>
@@ -185,6 +224,7 @@ export function KPICard({ data }: KPICardProps) {
             </>
           ) : (
             <>
+              {/* Normal Footnotes */}
               {data.footnote && data.footnote.length > 0 && (
                 <div className="mt-3 flex items-center gap-4 text-xs text-[var(--color-ink-muted)]">
                   {data.footnote.map((item, i) => (
@@ -195,22 +235,20 @@ export function KPICard({ data }: KPICardProps) {
                         </span>
                       )}
 
-          
-        </div>
-      )}
                       <span className="font-semibold text-[var(--color-ink)]">
                         {item.value}
+                        {item.unit && (
+                          <span className="ml-1 text-xs font-normal text-[var(--color-ink-muted)]">
+                            {item.unit}
+                          </span>
+                        )}
                       </span>
-                      {item.unit && (
-                        <span className="ml-1 text-xs text-[var(--color-ink-muted)]">
-                          {item.unit}
-                        </span>
-                      )}
                     </span>
                   ))}
                 </div>
               )}
 
+              {/* Sparkline */}
               {data.sparkline && (
                 <div className="mt-3">
                   <Sparkline
@@ -222,9 +260,11 @@ export function KPICard({ data }: KPICardProps) {
             </>
           )}
 
+          {/* Bar Visual */}
           {data.visual === "bar" &&
             data.barValue !== undefined && (
               <div className="mt-3">
+
                 {data.target !== undefined && (
                   <p className="mb-2 text-sm text-[var(--color-ink-soft)]">
                     Target {data.target}%
@@ -239,6 +279,7 @@ export function KPICard({ data }: KPICardProps) {
                     }}
                   />
                 </div>
+
               </div>
             )}
         </>
