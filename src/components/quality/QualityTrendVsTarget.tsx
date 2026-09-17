@@ -10,7 +10,7 @@ import {
 } from "recharts";
 
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
-import { getQualityTrendAnchors } from "../../data/qualityPerformanceData";
+import { getQualityTrendAnchors } from "../../data/dashboardData";
 import { QualitySectionCard } from "../quality/QualitySectionCard";
 
 export function QualityTrendVsTarget() {

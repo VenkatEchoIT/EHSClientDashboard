@@ -8,7 +8,9 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { dailyThroughputData } from "../../data/operationsData";
+import { getDailyThroughputData } from "../../services/operationsService";
+
+const dailyThroughputData = getDailyThroughputData();
 import { SectionCard } from "./SectionCard";
 
 function LegendDot({ color, label }: { color: string; label: string }) {

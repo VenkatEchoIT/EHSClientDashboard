@@ -1,6 +1,9 @@
 import { CalendarDays, ChevronDown } from "lucide-react";
 import { useState } from "react";
-import { dateFilters, subProjectOptions } from "../../data/operationsData";
+import { getDateFilters, getSubProjectOptions } from "../../services/operationsService";
+
+const dateFilters = getDateFilters();
+const subProjectOptions = getSubProjectOptions();
 import type { DateFilterKey } from "../../types/operations";
 
 interface DateFiltersProps {

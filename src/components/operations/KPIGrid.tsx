@@ -1,4 +1,6 @@
-import { kpiData } from "../../data/operationsData";
+import { getOperationsKPIs } from "../../services/operationsService";
+
+const kpiData = getOperationsKPIs();
 import { KPICard } from "./KPICard";
 
 export function KPIGrid() {

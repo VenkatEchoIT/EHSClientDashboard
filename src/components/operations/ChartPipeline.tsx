@@ -1,4 +1,6 @@
-import { pipelineData } from "../../data/operationsData";
+import { getPipelineData } from "../../services/operationsService";
+
+const pipelineData = getPipelineData();
 import { PipelineCard } from "./PipelineCard";
 import { SectionCard } from "./SectionCard";
 

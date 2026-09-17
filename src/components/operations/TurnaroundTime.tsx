@@ -1,4 +1,6 @@
-import { slowestChart, turnaroundBottleneck, turnaroundData } from "../../data/operationsData";
+import { getTurnaroundData } from "../../services/operationsService";
+
+const { stages: turnaroundData, bottleneck: turnaroundBottleneck, slowestChart } = getTurnaroundData();
 import { SectionCard } from "./SectionCard";
 
 export function TurnaroundTime() {

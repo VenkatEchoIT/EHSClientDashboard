@@ -1,6 +1,8 @@
 import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { AlertTriangle } from "lucide-react";
-import { chartAgingData } from "../../data/operationsData";
+import { getChartAgingData } from "../../services/operationsService";
+
+const chartAgingData = getChartAgingData();
 import { SectionCard } from "./SectionCard";
 
 const barColors = ["#f6cf8d", "#eba91f", "#f0975a", "#e8631f", "#d9481f"];

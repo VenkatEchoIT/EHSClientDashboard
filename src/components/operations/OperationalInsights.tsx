@@ -1,4 +1,6 @@
-import { insightData } from "../../data/operationsData";
+import { getOperationsInsights } from "../../services/operationsService";
+
+const insightData = getOperationsInsights();
 import { InsightCard } from "./InsightCard";
 
 export function OperationalInsights() {

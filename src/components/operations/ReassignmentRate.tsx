@@ -1,5 +1,7 @@
 import { ArrowLeftRight } from "lucide-react";
-import { reassignmentRate } from "../../data/operationsData";
+import { getReassignmentRate } from "../../services/operationsService";
+
+const reassignmentRate = getReassignmentRate();
 import { SectionCard } from "./SectionCard";
 import { TrendTag } from "./TrendTag";
 

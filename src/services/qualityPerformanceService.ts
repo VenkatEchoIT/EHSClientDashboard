@@ -17,7 +17,7 @@ import {
   buildInitialCoders,
   buildInitialDailyMetrics,
   buildWeeklyThroughput,
-} from "../data/qualityPerformanceData";
+} from "../data/dashboardData";
 
 const STORAGE_KEYS = {
   auditRecords: "qp_audit_records_v1",

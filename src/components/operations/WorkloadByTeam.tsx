@@ -1,5 +1,7 @@
 import { Users } from "lucide-react";
-import { teamWorkloadData } from "../../data/operationsData";
+import { getTeamWorkloadData } from "../../services/operationsService";
+
+const teamWorkloadData = getTeamWorkloadData();
 import { SectionCard } from "./SectionCard";
 import type { TeamWorkloadRow } from "../../types/operations";
 

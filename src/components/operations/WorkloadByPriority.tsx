@@ -1,5 +1,7 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { priorityData, priorityTotal } from "../../data/operationsData";
+import { getPriorityData } from "../../services/operationsService";
+
+const { data: priorityData, total: priorityTotal } = getPriorityData();
 import { SectionCard } from "./SectionCard";
 
 export function WorkloadByPriority() {
