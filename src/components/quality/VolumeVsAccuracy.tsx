@@ -57,9 +57,13 @@ export function VolumeVsAccuracy() {
     <QualitySectionCard
       title="Volume vs Accuracy"
       subtitle="Volume of charts Audited vs accuracy score"
-      legend={(Object.keys(categoryMeta) as AccuracyCategory[]).map((key) => (
-        <LegendDot key={key} color={categoryMeta[key].color} label={categoryMeta[key].label} />
-      ))}
+      legend={
+      <div className="flex w-full flex-wrap justify-end gap-4">
+        {(Object.keys(categoryMeta) as AccuracyCategory[]).map((key) => (
+          <LegendDot key={key} color={categoryMeta[key].color} label={categoryMeta[key].label} />
+        ))}
+      </div>
+      }
     >
       <div className="h-72 w-full" role="img" aria-label="Scatter chart of charts audited versus accuracy">
         <ResponsiveContainer width="100%" height="100%">

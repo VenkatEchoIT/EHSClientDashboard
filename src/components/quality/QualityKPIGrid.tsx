@@ -82,7 +82,7 @@ export function QualityKPIGrid() {
   );
 
   return (
-    <div className="-mx-4 flex gap-3.5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 lg:grid-cols-3 xl:grid-cols-6">
+     <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-6">
       {cards.map((card) => (
         <QualityKPICard key={card.id} data={card} />
       ))}

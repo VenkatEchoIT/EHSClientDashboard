@@ -22,7 +22,7 @@ export function AccuracyDistribution() {
     <QualitySectionCard title="First-Pass Accuracy Distribution" subtitle="Distribution of coders by first-pass accuracy">
       <div className="h-72 w-full" role="img" aria-label="Bar chart of coders by first-pass accuracy bucket">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={accuracyDistribution} margin={{ top: 28, right: 8, left: 8, bottom: 0 }}>
+          <BarChart data={accuracyDistribution} margin={{ top: 28, right: 8, left: -8, bottom: 0 }}>
             <CartesianGrid vertical={false} stroke="var(--color-border-soft)" />
             <XAxis
               dataKey="bucket"
@@ -30,7 +30,8 @@ export function AccuracyDistribution() {
               axisLine={false}
               tick={{ fontSize: 13, fill: "var(--color-ink-muted)" }}
             />
-            <YAxis
+             <YAxis
+              width={48}
               domain={[0, 100]}
               ticks={[0, 25, 50, 75, 100]}
               tickLine={false}
@@ -40,7 +41,7 @@ export function AccuracyDistribution() {
                 value: "Coders",
                 angle: -90,
                 position: "insideLeft",
-                offset: 0,
+                offset: 15,
                 fontSize: 14,
                 fill: "var(--color-ink-muted)",
               }}
