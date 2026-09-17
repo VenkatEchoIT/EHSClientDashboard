@@ -12,6 +12,7 @@ function InnerCard({
   value,
   unit,
   trend,
+  inverse = false,
 }: {
   icon: ReactNode;
   bg: string;
@@ -19,6 +20,7 @@ function InnerCard({
   value: string;
   unit?: string;
   trend: Trend;
+  inverse?: boolean;
 }) {
   return (
     <div className={`flex flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] ${bg} p-4`}>
@@ -31,7 +33,10 @@ function InnerCard({
           {value} {unit && <span className="text-sm font-normal text-[var(--color-ink-muted)]">{unit}</span>}
         </p>
         <div className="mt-2">
-          <TrendTag trend={trend} />
+          <TrendTag
+            trend={trend}
+            inverse={inverse}
+          />
         </div>
       </div>
     </div>
@@ -59,20 +64,42 @@ export function AuditPerformance() {
           trend={trendFor(kpis.chartsAudited, kpis.prev.chartsAudited, "count")}
         />
         <InnerCard
-          icon={<HelpCircle className="h-6 w-6 text-[var(--color-amber)]" strokeWidth={2} aria-hidden="true" />}
+          icon={
+            <HelpCircle
+              className="h-6 w-6 text-[var(--color-amber)]"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          }
           bg="bg-[var(--color-amber-soft)]"
           label="Audits pending"
           value={`${kpis.auditsPending}`}
           unit="Charts"
-          trend={trendFor(kpis.auditsPending, kpis.prev.auditsPending, "count")}
+          trend={trendFor(
+            kpis.auditsPending,
+            kpis.prev.auditsPending,
+            "count"
+          )}
+          inverse
         />
         <InnerCard
-          icon={<Clock className="h-6 w-6 text-[var(--color-primary)]" strokeWidth={2} aria-hidden="true" />}
+          icon={
+            <Clock
+              className="h-6 w-6 text-[var(--color-primary)]"
+              strokeWidth={2}
+              aria-hidden="true"
+            />
+          }
           bg="bg-[var(--color-accent-softer)]"
           label="Avg. Audit Time"
           value={`${kpis.avgAuditTimeDays}`}
           unit="days"
-          trend={trendFor(kpis.avgAuditTimeDays, kpis.prev.avgAuditTimeDays, "pts")}
+          trend={trendFor(
+            kpis.avgAuditTimeDays,
+            kpis.prev.avgAuditTimeDays,
+            "pts"
+          )}
+          inverse
         />
         <InnerCard
           icon={<FileCheck2 className="h-6 w-6 text-[var(--color-success)]" strokeWidth={2} aria-hidden="true" />}

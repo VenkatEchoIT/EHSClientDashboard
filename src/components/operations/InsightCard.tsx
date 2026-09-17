@@ -32,17 +32,44 @@ export function InsightCard({ data }: { data: InsightCardData }) {
   const Icon = iconMap[data.icon];
   const tone = toneClasses[data.tone];
 
+  const isInverseTrend =
+    data.label === "Current Bottleneck" ||
+    data.label === "Overdue Charts";
+
   return (
-    <div className={`flex flex-col gap-3 rounded-2xl border border-[#e1e1e1] ${tone.bg} p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]`}>
+    <div
+      className={`flex flex-col gap-3 rounded-2xl border border-[#e1e1e1] ${tone.bg} p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]`}
+    >
       <div className="flex items-center justify-between">
-        <p className="text-sm text-[var(--color-ink-soft)]">{data.label}</p>
-        <Icon className={`h-6 w-6 ${tone.icon}`} strokeWidth={2} aria-hidden="true" />
+        <p className="text-sm text-[var(--color-ink-soft)]">
+          {data.label}
+        </p>
+
+        <Icon
+          className={`h-6 w-6 ${tone.icon}`}
+          strokeWidth={2}
+          aria-hidden="true"
+        />
       </div>
+
       <div>
-        <p className="mb-1 text-[24px] font-semibold leading-tight text-[var(--color-ink)]">{data.value}</p>
-        {data.supporting && <p className="text-sm text-[var(--color-ink-muted)]">{data.supporting}</p>}
+        <p className="mb-1 text-[24px] font-semibold leading-tight text-[var(--color-ink)]">
+          {data.value}
+        </p>
+
+        {data.supporting && (
+          <p className="text-sm text-[var(--color-ink-muted)]">
+            {data.supporting}
+          </p>
+        )}
       </div>
-      {data.trend && <TrendTag trend={data.trend} />}
+
+      {data.trend && (
+        <TrendTag
+          trend={data.trend}
+          inverse={isInverseTrend}
+        />
+      )}
     </div>
   );
 }

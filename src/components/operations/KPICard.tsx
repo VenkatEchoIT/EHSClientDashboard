@@ -150,7 +150,13 @@ export function KPICard({ data }: KPICardProps) {
                       {item.label}
                     </span>
 
-                    <span className="mt-0.5 text-sm font-semibold text-[var(--color-ink)]">
+                    <span
+                      className={`mt-0.5 text-sm font-semibold ${
+                        i === 0
+                          ? "text-[var(--color-accent)]"
+                          : "text-[var(--color-danger)]"
+                      }`}
+                    >
                       {item.value}
                     </span>
                   </div>
@@ -214,7 +220,7 @@ export function KPICard({ data }: KPICardProps) {
                         </span>
                       )}
 
-                      <span className="font-semibold text-[var(--color-ink)]">
+                      <span className="font-semibold text-[var(--color-danger)]">
                         {item.value}
                       </span>
                       

@@ -1,9 +1,8 @@
 import { ArrowDown, ArrowUp, Minus } from "lucide-react";
-import type { KPITone, Trend } from "../../types/operations";
+import type { Trend } from "../../types/operations";
 
 interface TrendTagProps {
   trend: Trend;
-  tone?: KPITone;
   size?: "sm" | "md";
   inverse?: boolean;
 }

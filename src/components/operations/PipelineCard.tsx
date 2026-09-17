@@ -21,6 +21,14 @@ const iconByStage: Record<string, LucideIcon> = {
   completed: CheckCircle2,
 };
 
+const inverseTrendStages = new Set([
+  "unallocated",
+  "open",
+  "pending-clarification",
+  "qa-review",
+  "re-assigned",
+]);
+
 const toneClasses: Record<PipelineTone, { bg: string; border: string; text: string; icon: string }> = {
   neutral: {
     bg: "bg-[var(--color-neutral-soft)]",
@@ -109,6 +117,7 @@ export function PipelineCard({ stage }: { stage: PipelineStageData }) {
                 direction: stage.trend.direction,
                 label: stage.percentLabel,
               }}
+              inverse={inverseTrendStages.has(stage.id)}
             />
           </div>
         )}

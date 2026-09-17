@@ -40,6 +40,7 @@ export interface DailyThroughputPoint {
   date: string;
   received: number;
   completed: number;
+  
 }
 
 export interface TurnaroundStage {

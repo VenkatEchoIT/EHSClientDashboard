@@ -1,34 +1,40 @@
-import { ArrowDown, ArrowUp } from "lucide-react";
-import type { QualityKPITone, Trend } from "../../types/qualityPerformance";
+import { ArrowDown, ArrowUp, Minus } from "lucide-react";
+import type { Trend } from "../../types/qualityPerformance";
 
 interface TrendTagProps {
   trend: Trend;
-  tone?: QualityKPITone;
   size?: "sm" | "md";
+  inverse?: boolean;
 }
-
-const colorByDirection: Record<Trend["direction"], string> = {
-  up: "text-[var(--color-success)]",
-  down: "text-[var(--color-danger)]",
-  flat: "text-[var(--color-ink-muted)]",
-};
 
 export function TrendTag({
   trend,
   size = "sm",
+  inverse = false,
 }: TrendTagProps) {
   const Icon =
     trend.direction === "down"
       ? ArrowDown
-      : ArrowUp;
+      : trend.direction === "up"
+        ? ArrowUp
+        : Minus;
 
   const textSize =
     size === "sm"
       ? "text-sm"
       : "text-base";
 
-  const colorClass =
-    colorByDirection[trend.direction];
+  let colorClass = "text-[var(--color-ink-muted)]";
+
+  if (trend.direction !== "flat") {
+    const isPositive = inverse
+      ? trend.direction === "down"
+      : trend.direction === "up";
+
+    colorClass = isPositive
+      ? "text-[var(--color-success)]"
+      : "text-[var(--color-danger)]";
+  }
 
   return (
     <span

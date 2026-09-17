@@ -14,6 +14,12 @@ const sparklineColorByTone: Record<QualityKPITone, string> = {
   neutral: "#8a847c",
 };
 
+const inverseTrendLabels = new Set([
+  "Rework rate",
+  "Failed audit checks",
+  "Rejected records",
+]);
+
 const ringColorByTone: Record<QualityKPITone, string> = {
   accent: "var(--color-accent)",
   amber: "var(--color-amber)",
@@ -54,6 +60,8 @@ function DonutVisual({ value, tone }: { value: number; tone: QualityKPITone }) {
 }
 
 export function QualityKPICard({ data }: QualityKPICardProps) {
+  const isInverseTrend = inverseTrendLabels.has(data.label);
+
   return (
     <div className="flex min-w-[190px] flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 shadow-[0_1px_2px_rgba(36,33,29,0.20)] transition-shadow hover:shadow-[0_2px_10px_rgba(36,33,29,0.06)]">
       <div className="flex items-start justify-between gap-3">
@@ -66,7 +74,7 @@ export function QualityKPICard({ data }: QualityKPICardProps) {
             <div className="mt-2">
               <TrendTag
                 trend={data.trend}
-                tone={data.trendTone ?? data.tone}
+                inverse={isInverseTrend}
               />
             </div>
           )}

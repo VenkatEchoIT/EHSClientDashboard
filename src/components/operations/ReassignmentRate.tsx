@@ -13,7 +13,7 @@ export function ReassignmentRate() {
           <ArrowLeftRight className="h-8 w-8 text-[var(--color-accent)]" strokeWidth={2} aria-hidden="true" />
         </span>
         <p className="text-3xl font-semibold text-[var(--color-ink)]">{reassignmentRate.percent}</p>
-        <TrendTag trend={reassignmentRate.trend} />
+        <TrendTag trend={reassignmentRate.trend} inverse />
       </div>
 
       <div className="mt-6 flex items-center justify-between border-t border-[var(--color-border-soft)] pt-4 text-sm">
