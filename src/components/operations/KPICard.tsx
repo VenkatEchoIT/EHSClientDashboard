@@ -76,6 +76,7 @@ export function KPICard({ data }: KPICardProps) {
   const isCompletionRate = data.id === "completion-rate";
   const isSlaCompliance = data.id === "sla-compliance";
   const isOpenBacklog = data.id === "open-backlog";
+  const isChartsReceived = data.id === "charts-received";
 
   return (
     <div className="flex min-w-0 flex-1 flex-col justify-between rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-5 py-4 transition-shadow hover:shadow-[0_4px_12px_rgba(36,33,29,0.10)]">
@@ -176,7 +177,7 @@ export function KPICard({ data }: KPICardProps) {
                 <div className="mt-2">
                   <TrendTag
                     trend={data.trend}
-                    tone={data.trendTone ?? data.tone}
+                    inverse={isOpenBacklog || isChartsReceived}
                   />
                 </div>
               )}

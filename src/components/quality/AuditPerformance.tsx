@@ -49,7 +49,7 @@ export function AuditPerformance() {
 
   return (
     <QualitySectionCard title="Audit Performance" subtitle="Overview of audit team performance">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-2 gap-3">
         <InnerCard
           icon={<CheckCircle2 className="h-6 w-6 text-[var(--color-info)]" strokeWidth={2} aria-hidden="true" />}
           bg="bg-[var(--color-info-soft)]"
