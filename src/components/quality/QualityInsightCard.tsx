@@ -40,14 +40,21 @@ export function QualityInsightCard({ data }: { data: QualityInsightCardData }) {
 
   return (
     <div className={`flex flex-col gap-3 rounded-2xl border border-[#e1e1e1] ${tone.bg} p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04)]`}>
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-[var(--color-ink-soft)]">{data.label}</p>
-        <Icon
-          className={`${data.icon === "clock" ? "h-8 w-8" : "h-6 w-6"} ${tone.icon}`}
-          strokeWidth={2}
-          aria-hidden="true"
-        />
-      </div>
+      <div className="flex items-start justify-between gap-2">
+          <p className="min-w-0 flex-1 text-sm text-[var(--color-ink-soft)]">
+            {data.label}
+          </p>
+
+          <Icon
+            className={`shrink-0 ${
+              data.icon === "clock"
+                ? "h-[26px] w-[26px] sm:h-6 sm:w-6"
+                : "h-6 w-6"
+            } ${tone.icon}`}
+            strokeWidth={2}
+            aria-hidden="true"
+          />
+        </div>
       <div>
         <p className="mb-1 text-[24px] font-semibold leading-tight text-[var(--color-ink)]">{data.value}</p>
         {data.supporting && <p className="text-sm text-[var(--color-ink-muted)]">{data.supporting}</p>}

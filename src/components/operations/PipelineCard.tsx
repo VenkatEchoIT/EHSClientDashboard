@@ -84,13 +84,13 @@ export function PipelineCard({ stage }: { stage: PipelineStageData }) {
       className={`flex min-w-0 flex-1 flex-col justify-between rounded-2xl border ${tone.border} ${tone.bg} p-4`}
     >
       {/* Label + Icon */}
-      <div className="flex items-start justify-between">
+      <div className="flex items-start justify-between gap-2">
         <p className="text-sm text-[var(--color-ink-soft)]">
           {stage.label}
         </p>
 
         <Icon
-          className={`h-6 w-6 ${tone.icon}`}
+          className={`h-6 w-6 shrink-0 ${tone.icon}`}
           strokeWidth={2}
           aria-hidden="true"
         />
