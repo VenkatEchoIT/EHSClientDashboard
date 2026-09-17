@@ -2,7 +2,7 @@ import { QualitySectionCard } from "./QualitySectionCard";
 import { Sparkline } from "./Sparkline";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
 
-const rankTone = ["bg-[var(--color-accent)] text-white", "bg-[var(--color-accent-soft)] text-[var(--color-accent)]"];
+const rankTone = ["bg-[var(--color-accent-soft)] text-[var(--color-accent)]", "bg-[var(--color-accent-soft)] text-[var(--color-accent)]"];
 
 export function TopPerformers() {
   const { topPerformers } = useQualityPerformance();
