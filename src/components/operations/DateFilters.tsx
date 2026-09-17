@@ -47,7 +47,7 @@ export function DateFilters({ selected, onSelect }: DateFiltersProps) {
           onClick={() => setIsSubProjectOpen((open) => !open)}
           aria-haspopup="listbox"
           aria-expanded={isSubProjectOpen}
-          className="inline-flex items-center gap-2 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-3.5 py-2 text-sm font-medium text-[var(--color-ink-soft)] hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
+          className="inline-flex h-[42px] items-center gap-2 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-3.5 py-2 text-sm font-medium text-[var(--color-ink-soft)] hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)]"
         >
           {subProject}
           <ChevronDown className="h-4 w-4" strokeWidth={2} aria-hidden="true" />

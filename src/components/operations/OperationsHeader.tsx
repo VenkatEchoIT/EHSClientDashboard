@@ -51,7 +51,7 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
           <p className="text-sm text-ink-soft sm:text-base">{copy.subtitle}</p>
         </div>
 
-        <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-start sm:gap-3">
+        <div className="flex w-full items-center justify-end gap-2 sm:w-auto sm:justify-start sm:gap-3">
           <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-ink-soft)] sm:text-sm">
             <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" aria-hidden="true" />
             Last updated: {lastUpdated}
