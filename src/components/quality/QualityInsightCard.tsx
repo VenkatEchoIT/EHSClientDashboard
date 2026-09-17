@@ -5,6 +5,9 @@ import {
   Inbox,
   ShieldCheck,
   TrendingUp,
+  FileSearch,
+  ChartNoAxesCombined,
+  Award,
   type LucideIcon,
 } from "lucide-react";
 import type { QualityInsightCardData } from "../../types/qualityPerformance";
@@ -17,6 +20,9 @@ const iconMap: Record<QualityInsightCardData["icon"], LucideIcon> = {
   trendingUp: TrendingUp,
   calendar: Calendar,
   inbox: Inbox,
+  fileSearch: FileSearch,
+  improvements: ChartNoAxesCombined,
+  speciality: Award,
 };
 
 const toneClasses: Record<QualityInsightCardData["tone"], { bg: string; icon: string }> = {

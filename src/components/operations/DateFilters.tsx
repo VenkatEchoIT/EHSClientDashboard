@@ -35,7 +35,7 @@ export function DateFilters({ selected, onSelect }: DateFiltersProps) {
               }`}
             >
               {filter.label}
-              {isCustom && <CalendarDays className="h-3.5 w-3.5" strokeWidth={2} aria-hidden="true" />}
+              {isCustom && <CalendarDays className="h-4 w-4" strokeWidth={2} aria-hidden="true" />}
             </button>
           );
         })}

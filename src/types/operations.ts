@@ -22,7 +22,7 @@ export interface KPICardData {
   barValue?: number; // 0-100, used when visual === "bar"
 }
 
-export type PipelineTone = "neutral" | "accent" | "amber" | "info" | "success" | "danger";
+export type PipelineTone = "neutral" | "accent" | "amber" | "info" | "success" | "danger" |"darkyellow" | "reassigned";
 
 export interface PipelineStageData {
   id: string;
