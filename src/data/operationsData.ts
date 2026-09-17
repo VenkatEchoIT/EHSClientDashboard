@@ -228,9 +228,9 @@ export const insightData: InsightCardData[] = [
     value: "Coding",
     supporting: "2.4 days",
     trend: { direction: "up", label: "18% vs prev"},
-    tone: "danger",
+    tone: "amber",
   },
-  {
+  /*{
     id: "overdue-138",
     icon: "alertTriangle",
     label: "Overdue Charts",
@@ -238,7 +238,7 @@ export const insightData: InsightCardData[] = [
     supporting: "",
     trend: { direction: "up", label: "22 vs prev" },
     tone: "amber",
-  },
+  },*/
   {
     id: "sla",
     icon: "shieldCheck",
