@@ -1,15 +1,14 @@
 import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { AlertTriangle } from "lucide-react";
 import { getChartAgingData } from "../../services/operationsService";
-
-const chartAgingData = getChartAgingData();
+import type { ChartAgingBucket, CustomRange, DateFilterKey } from "../../types/operations";
 import { SectionCard } from "./SectionCard";
 
 const barColors = ["#f6cf8d", "#eba91f", "#f0975a", "#e8631f", "#d9481f"];
 
-function AgingLabel(props: { x?: number; y?: number; width?: number; value?: number; index?: number }) {
-  const { x = 0, y = 0, width = 0, value, index = 0 } = props;
-  const isWarning = chartAgingData[index]?.warning;
+function AgingLabel(props: { x?: number; y?: number; width?: number; value?: number; index?: number; data: ChartAgingBucket[] }) {
+  const { x = 0, y = 0, width = 0, value, index = 0, data } = props;
+  const isWarning = data[index]?.warning;
   return (
     <g transform={`translate(${x + width / 2}, ${y - 10})`}>
       {isWarning && (
@@ -22,7 +21,13 @@ function AgingLabel(props: { x?: number; y?: number; width?: number; value?: num
   );
 }
 
-export function ChartAging() {
+interface ChartAgingProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function ChartAging({ dateFilter, customRange }: ChartAgingProps) {
+  const chartAgingData = getChartAgingData(dateFilter, customRange);
   return (
     <SectionCard title="Chart Aging" subtitle="How long open charts have been with us">
       <div className="h-72 w-full" role="img" aria-label="Bar chart of open chart age buckets">
@@ -40,7 +45,7 @@ export function ChartAging() {
               {chartAgingData.map((entry, index) => (
                 <Cell key={entry.bucket} fill={barColors[index]} />
               ))}
-              <LabelList dataKey="count" content={<AgingLabel />} />
+              <LabelList dataKey="count" content={<AgingLabel data={chartAgingData} />} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

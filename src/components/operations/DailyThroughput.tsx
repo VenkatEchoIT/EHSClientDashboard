@@ -9,8 +9,7 @@ import {
   YAxis,
 } from "recharts";
 import { getDailyThroughputData } from "../../services/operationsService";
-
-const dailyThroughputData = getDailyThroughputData();
+import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { SectionCard } from "./SectionCard";
 
 function LegendDot({ color, label }: { color: string; label: string }) {
@@ -22,7 +21,13 @@ function LegendDot({ color, label }: { color: string; label: string }) {
   );
 }
 
-export function DailyThroughput() {
+interface DailyThroughputProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function DailyThroughput({ dateFilter, customRange }: DailyThroughputProps) {
+  const dailyThroughputData = getDailyThroughputData(dateFilter, customRange);
   const chartData = dailyThroughputData.map((point) => ({
     ...point,
     label: `${point.day} ${point.date}`,
@@ -30,8 +35,8 @@ export function DailyThroughput() {
 
   return (
     <SectionCard
-  title="Daily Throughput"
-  subtitle="Charts received and completed per day"
+  title={dateFilter === "today" ? "Hourly Throughput" : "Daily Throughput"}
+  subtitle={dateFilter === "today" ? "Charts received and completed per hour" : "Charts received and completed per day"}
   className="[&>div:first-of-type]:flex-col sm:[&>div:first-of-type]:flex-row [&>div:first-of-type>div:first-child]:w-full [&>div:first-of-type>div:first-child]:flex-1"
   action={
     <div className="flex w-full items-center justify-end gap-4 sm:w-auto">

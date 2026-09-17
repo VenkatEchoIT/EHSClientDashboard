@@ -1,11 +1,16 @@
 import { ArrowLeftRight } from "lucide-react";
 import { getReassignmentRate } from "../../services/operationsService";
-
-const reassignmentRate = getReassignmentRate();
+import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { SectionCard } from "./SectionCard";
 import { TrendTag } from "./TrendTag";
 
-export function ReassignmentRate() {
+interface ReassignmentRateProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function ReassignmentRate({ dateFilter, customRange }: ReassignmentRateProps) {
+  const reassignmentRate = getReassignmentRate(dateFilter, customRange);
   return (
     <SectionCard title="Reassignment Rate" subtitle="Percentage of charts re-assigned">
       <div className="flex flex-col items-center gap-3 py-2">

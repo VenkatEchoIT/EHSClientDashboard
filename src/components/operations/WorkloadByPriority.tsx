@@ -1,10 +1,15 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { getPriorityData } from "../../services/operationsService";
-
-const { data: priorityData, total: priorityTotal } = getPriorityData();
+import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { SectionCard } from "./SectionCard";
 
-export function WorkloadByPriority() {
+interface WorkloadByPriorityProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function WorkloadByPriority({ dateFilter, customRange }: WorkloadByPriorityProps) {
+  const { data: priorityData, total: priorityTotal } = getPriorityData(dateFilter, customRange);
   return (
     <SectionCard title="Workload by Priority" subtitle="Distribution of open charts by priority">
       <div className="mt-15 flex flex-col items-center gap-6 sm:flex-row sm:justify-center sm:gap-10">

@@ -1,9 +1,14 @@
 import { getOperationsInsights } from "../../services/operationsService";
-
-const insightData = getOperationsInsights();
+import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { InsightCard } from "./InsightCard";
 
-export function OperationalInsights() {
+interface OperationalInsightsProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function OperationalInsights({ dateFilter, customRange }: OperationalInsightsProps) {
+  const insightData = getOperationsInsights(dateFilter, customRange);
   return (
     <section>
       <h2 className="text-[18px] font-semibold tracking-wide text-[var(--color-ink-soft)]">OPERATIONAL INSIGHTS</h2>

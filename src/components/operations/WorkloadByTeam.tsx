@@ -1,9 +1,7 @@
 import { Users } from "lucide-react";
 import { getTeamWorkloadData } from "../../services/operationsService";
-
-const teamWorkloadData = getTeamWorkloadData();
 import { SectionCard } from "./SectionCard";
-import type { TeamWorkloadRow } from "../../types/operations";
+import type { CustomRange, DateFilterKey, TeamWorkloadRow } from "../../types/operations";
 
 const avatarToneClasses: Record<TeamWorkloadRow["avatarTone"], string> = {
   accent: "bg-[var(--color-accent-soft)] text-[var(--color-accent)]",
@@ -18,7 +16,13 @@ const columns: { key: keyof TeamWorkloadRow; label: string }[] = [
   { key: "backlog", label: "Backlog" },
 ];
 
-export function WorkloadByTeam() {
+interface WorkloadByTeamProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function WorkloadByTeam({ dateFilter, customRange }: WorkloadByTeamProps) {
+  const teamWorkloadData = getTeamWorkloadData(dateFilter, customRange);
   return (
     <SectionCard
       title="Workload by Team"

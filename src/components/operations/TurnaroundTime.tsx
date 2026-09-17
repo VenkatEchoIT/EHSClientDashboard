@@ -1,9 +1,14 @@
 import { getTurnaroundData } from "../../services/operationsService";
-
-const { stages: turnaroundData, bottleneck: turnaroundBottleneck, slowestChart } = getTurnaroundData();
+import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { SectionCard } from "./SectionCard";
 
-export function TurnaroundTime() {
+interface TurnaroundTimeProps {
+  dateFilter: DateFilterKey;
+  customRange?: CustomRange;
+}
+
+export function TurnaroundTime({ dateFilter, customRange }: TurnaroundTimeProps) {
+  const { stages: turnaroundData, bottleneck: turnaroundBottleneck, slowestChart } = getTurnaroundData(dateFilter, customRange);
   return (
     <SectionCard title="Turnaround Time" subtitle="Median days per stage">
       <div className="flex flex-col gap-4">

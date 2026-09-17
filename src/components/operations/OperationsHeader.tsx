@@ -1,12 +1,14 @@
 import { RefreshCw, Upload } from "lucide-react";
 import { useState } from "react";
-import type { DashboardTab, DateFilterKey } from "../../types/operations";
+import type { CustomRange, DashboardTab, DateFilterKey } from "../../types/operations";
 import { DashboardTabs } from "./DashboardTabs";
 import { DateFilters } from "./DateFilters";
 
 interface OperationsHeaderProps {
   dateFilter: DateFilterKey;
   onDateFilterChange: (key: DateFilterKey) => void;
+  customRange?: CustomRange;
+  onCustomRangeChange: (range: CustomRange) => void;
   tab: DashboardTab;
   onTabChange: (tab: DashboardTab) => void;
 }
@@ -22,7 +24,14 @@ const HEADER_COPY: Record<DashboardTab, { title: string; subtitle: string }> = {
   },
 };
 
-export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabChange }: OperationsHeaderProps) {
+export function OperationsHeader({
+  dateFilter,
+  onDateFilterChange,
+  customRange,
+  onCustomRangeChange,
+  tab,
+  onTabChange,
+}: OperationsHeaderProps) {
   const [lastUpdated, setLastUpdated] = useState("2 min ago");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [exportMessage, setExportMessage] = useState<string | null>(null);
@@ -109,7 +118,12 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
       </div>
 
       <div className="mt-4 flex flex-col gap-3 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
-        <DateFilters selected={dateFilter} onSelect={onDateFilterChange} />
+        <DateFilters
+          selected={dateFilter}
+          onSelect={onDateFilterChange}
+          customRange={customRange}
+          onCustomRangeChange={onCustomRangeChange}
+        />
         <DashboardTabs selected={tab} onSelect={onTabChange} />
       </div>
     </div>
