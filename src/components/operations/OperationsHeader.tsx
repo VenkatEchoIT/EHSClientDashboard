@@ -62,7 +62,7 @@ export function OperationsHeader({ dateFilter, onDateFilterChange, tab, onTabCha
             aria-label="Refresh dashboard data"
             className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--color-border-soft)] bg-[var(--color-surface)] text-[var(--color-ink-soft)] hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] sm:h-9 sm:w-9"
           >
-            <RefreshCw className={`h-3.5 w-3.5 sm:h-4 sm:w-4 ${isRefreshing ? "animate-spin" : ""}`} />
+            <RefreshCw className={`h-4 w-4 sm:h-4 sm:w-4 ${isRefreshing ? "animate-spin" : ""}`} />
           </button>
           <div className="relative">
             <button

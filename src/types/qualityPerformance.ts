@@ -80,7 +80,7 @@ export interface QualityKPICardData {
 
 export interface QualityInsightCardData {
   id: string;
-  icon: "clock" | "alertTriangle" | "shieldCheck" | "trendingUp" | "calendar" | "inbox";
+  icon: "clock" | "alertTriangle" | "shieldCheck" | "trendingUp" | "calendar" | "inbox" |"improvements" |"speciality"| "fileSearch";
   label: string;
   value: string;
   supporting: string;

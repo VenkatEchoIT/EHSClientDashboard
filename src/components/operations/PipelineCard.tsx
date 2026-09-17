@@ -81,35 +81,37 @@ export function PipelineCard({ stage }: { stage: PipelineStageData }) {
 
   return (
     <div
-      className={`flex min-w-[150px] flex-1 flex-col gap-3 rounded-2xl border ${tone.border} ${tone.bg} px-4 py-4`}
+      className={`flex min-w-0 flex-1 flex-col justify-between rounded-2xl border ${tone.border} ${tone.bg} p-4`}
     >
-      {/* Icon + TrendTag */}
-      <div className="flex items-center justify-between">
+      {/* Label + Icon */}
+      <div className="flex items-start justify-between">
+        <p className="text-sm text-[var(--color-ink-soft)]">
+          {stage.label}
+        </p>
+
         <Icon
           className={`h-6 w-6 ${tone.icon}`}
           strokeWidth={2}
           aria-hidden="true"
         />
-
-        {stage.trend && (
-          <TrendTag
-            trend={{
-              direction: stage.trend.direction,
-              label: stage.percentLabel,
-            }}
-          />
-        )}
       </div>
 
-      {/* Value + Label */}
-      <div>
-        <p className={`text-2xl font-semibold leading-none ${tone.text}`}>
+      {/* Value + Trend */}
+      <div className="mt-3">
+        <p className="text-2xl font-semibold leading-none text-[var(--color-ink)]">
           {stage.value.toLocaleString()}
         </p>
 
-        <p className="mt-1.5 text-sm text-[var(--color-ink-soft)]">
-          {stage.label}
-        </p>
+        {stage.trend && (
+          <div className="mt-2">
+            <TrendTag
+              trend={{
+                direction: stage.trend.direction,
+                label: stage.percentLabel,
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -8,15 +8,15 @@ export function QualityInsights() {
   const cards: QualityInsightCardData[] = [
     {
       id: "quality-vs-target",
-      icon: "shieldCheck",
+      icon: "fileSearch",
       label: "Quality vs target",
       value: `${Math.abs(insights.qualityVsTargetPts)} pts`,
       supporting: insights.qualityVsTargetPts >= 0 ? "below target" : "above target",
-      tone: "danger",
+      tone: "accent",
     },
     {
       id: "improvement",
-      icon: "trendingUp",
+      icon: "improvements",
       label: "Improvement",
       value: `${insights.improvementPts >= 0 ? "+" : ""}${insights.improvementPts} pts`,
       supporting: "vs previous period",
@@ -24,7 +24,7 @@ export function QualityInsights() {
     },
     {
       id: "top-specialty",
-      icon: "shieldCheck",
+      icon: "speciality",
       label: "Top specialty",
       value: insights.topSpecialty.specialty,
       supporting: `${insights.topSpecialty.passRate}% pass rate`,
@@ -36,7 +36,7 @@ export function QualityInsights() {
       label: "Most common error",
       value: insights.mostCommonError.reason,
       supporting: `${insights.mostCommonError.percent}% of total errors`,
-      tone: "amber",
+      tone: "danger",
     },
     {
       id: "rework-savings",
@@ -44,7 +44,7 @@ export function QualityInsights() {
       label: "Rework savings opportunity",
       value: `~${insights.reworkSavingsHours} hrs`,
       supporting: "if rework reduced by 50%",
-      tone: "accent",
+      tone: "amber",
     },
   ];
 

@@ -67,8 +67,8 @@ export function AuditPerformance() {
           trend={trendFor(kpis.auditsPending, kpis.prev.auditsPending, "count")}
         />
         <InnerCard
-          icon={<Clock className="h-6 w-6 text-[var(--color-danger)]" strokeWidth={2} aria-hidden="true" />}
-          bg="bg-[var(--color-danger-soft)]"
+          icon={<Clock className="h-6 w-6 text-[var(--color-primary)]" strokeWidth={2} aria-hidden="true" />}
+          bg="bg-[var(--color-accent-softer)]"
           label="Avg. Audit Time"
           value={`${kpis.avgAuditTimeDays}`}
           unit="days"
