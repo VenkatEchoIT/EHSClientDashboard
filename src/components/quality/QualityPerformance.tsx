@@ -1,5 +1,5 @@
 import { QualityPerformanceProvider } from "../../context/QualityPerformanceContext";
-import type { DateFilterKey } from "../../types/operations";
+import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { AccuracyDistribution } from "./AccuracyDistribution";
 import { AuditPerformance } from "./AuditPerformance";
 import { AuditThroughput } from "./AuditThroughput";
@@ -13,11 +13,12 @@ import { VolumeVsAccuracy } from "./VolumeVsAccuracy";
 
 interface QualityPerformanceProps {
   dateFilter: DateFilterKey;
+  customRange?: CustomRange;
 }
 
-export function QualityPerformance({ dateFilter }: QualityPerformanceProps) {
+export function QualityPerformance({ dateFilter, customRange }: QualityPerformanceProps) {
   return (
-    <QualityPerformanceProvider dateFilter={dateFilter}>
+    <QualityPerformanceProvider dateFilter={dateFilter} customRange={customRange}>
       <div className="flex flex-col gap-6">
         <QualityKPIGrid />
 

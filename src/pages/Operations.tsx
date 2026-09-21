@@ -11,10 +11,11 @@ import { ReassignmentRate } from "../components/operations/ReassignmentRate";
 import { TurnaroundTime } from "../components/operations/TurnaroundTime";
 import { WorkloadByPriority } from "../components/operations/WorkloadByPriority";
 import { WorkloadByTeam } from "../components/operations/WorkloadByTeam";
-import type { DashboardTab, DateFilterKey } from "../types/operations";
+import type { CustomRange, DashboardTab, DateFilterKey } from "../types/operations";
 
 export function Operations() {
   const [dateFilter, setDateFilter] = useState<DateFilterKey>("30d");
+  const [customRange, setCustomRange] = useState<CustomRange | undefined>(undefined);
   const [tab, setTab] = useState<DashboardTab>("operations");
 
   return (
@@ -23,33 +24,35 @@ export function Operations() {
         <OperationsHeader
           dateFilter={dateFilter}
           onDateFilterChange={setDateFilter}
+          customRange={customRange}
+          onCustomRangeChange={setCustomRange}
           tab={tab}
           onTabChange={setTab}
         />
 
         {tab === "quality" ? (
-          <QualityPerformance dateFilter={dateFilter} />
+          <QualityPerformance dateFilter={dateFilter} customRange={customRange} />
         ) : (
           <>
-            <KPIGrid />
-            <ChartPipeline />
+            <KPIGrid dateFilter={dateFilter} customRange={customRange} />
+            <ChartPipeline dateFilter={dateFilter} customRange={customRange} />
 
             <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-              <DailyThroughput />
-              <TurnaroundTime />
+              <DailyThroughput dateFilter={dateFilter} customRange={customRange} />
+              <TurnaroundTime dateFilter={dateFilter} customRange={customRange} />
             </div>
 
             <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-              <ChartAging />
-              <WorkloadByPriority />
+              <ChartAging dateFilter={dateFilter} customRange={customRange} />
+              <WorkloadByPriority dateFilter={dateFilter} customRange={customRange} />
             </div>
 
             <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-              <WorkloadByTeam />
-              <ReassignmentRate />
+              <WorkloadByTeam dateFilter={dateFilter} customRange={customRange} />
+              <ReassignmentRate dateFilter={dateFilter} customRange={customRange} />
             </div>
 
-            <OperationalInsights />
+            <OperationalInsights dateFilter={dateFilter} customRange={customRange} />
           </>
         )}
 

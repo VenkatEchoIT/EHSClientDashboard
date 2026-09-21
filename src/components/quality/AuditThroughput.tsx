@@ -1,7 +1,6 @@
-import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { QualitySectionCard } from "./QualitySectionCard";
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
-import type { WeekdayThroughput } from "../../types/qualityPerformance";
 
 const FULL_DAY_NAME: Record<string, string> = {
   Mon: "Monday",
@@ -13,76 +12,48 @@ const FULL_DAY_NAME: Record<string, string> = {
   Sun: "Sunday",
 };
 
-function LegendDot({ color, label }: { color: string; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-ink-soft)]">
-      <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: color }} aria-hidden="true" />
-      {label}
-    </span>
-  );
-}
-
-function CustomTooltip({ active, payload }: { active?: boolean; payload?: { payload: WeekdayThroughput }[] }) {
-  if (!active || !payload || !payload.length) return null;
-  const point = payload[0].payload;
-  return (
-    <div className="rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] p-3 text-xs shadow-lg">
-      <p className="mb-1.5 font-semibold text-[var(--color-ink)]">{point.day}</p>
-      <div className="flex flex-col gap-1 text-[var(--color-ink-soft)]">
-        <span>
-          Charts Audited: <span className="font-semibold text-[var(--color-ink)]">{point.chartsAudited} charts</span>
-        </span>
-        <span>
-          Pending Queue: <span className="font-semibold text-[var(--color-ink)]">{point.pendingQueue} charts</span>
-        </span>
-        <span>
-          Pass Rate: <span className="font-semibold text-[var(--color-ink)]">{point.passRate}%</span>
-        </span>
-      </div>
-    </div>
-  );
-}
-
 export function AuditThroughput() {
-  const { weeklyThroughput, currentQueue } = useQualityPerformance();
+  const { throughputWindow, currentQueue } = useQualityPerformance();
+  const { totalAudited, totalPending, bestDay } = throughputWindow;
 
-  const avgDailyAudited = Math.round(
-    weeklyThroughput.reduce((sum, d) => sum + d.chartsAudited, 0) / weeklyThroughput.length
-  );
-  const bestDay = [...weeklyThroughput].sort((a, b) => b.passRate - a.passRate)[0];
+  // Same treatment as the Operations Daily Throughput card: just the two
+  // window totals rather than a bar per day, so the chart stays readable
+  // regardless of how many days are in the selected range.
+  const barData = [
+    { name: "Avg Charts Audited", value: totalAudited, fill: "#1f9254" },
+    { name: "Pending Queue", value: totalPending, fill: "#eba91f" },
+  ];
 
   return (
-    <QualitySectionCard
-      title="Audit Throughput & Backlog"
-      legend={
-        <div className="flex w-full flex-wrap justify-end gap-4">
-          <LegendDot color="#1f9254" label="Charts Audited" />
-          <LegendDot color="#eba91f" label="Pending Queue" />
-        </div>
-      }
-    >
-      <div className="h-64 w-full" role="img" aria-label="Grouped bar chart of audit throughput and backlog by weekday">
+    <QualitySectionCard title="Audit Throughput & Backlog">
+      <div className="h-64 w-full" role="img" aria-label="Bar chart of total charts audited vs pending queue">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={weeklyThroughput} margin={{ top: 12, right: 8, left: -12, bottom: 0 }} barGap={6}>
+          <BarChart data={barData} margin={{ top: 20, right: 8, left: -12, bottom: 0 }}>
             <CartesianGrid vertical={false} stroke="var(--color-border-soft)" />
-            <XAxis dataKey="day" tickLine={false} axisLine={false} tick={{ fontSize: 12, fill: "var(--color-ink-muted)" }} />
+            <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 13, fill: "var(--color-ink-muted)" }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 12, fill: "var(--color-ink-muted)" }} />
-            <Tooltip content={<CustomTooltip />} cursor={{ fill: "var(--color-neutral-soft)" }} />
-            <Bar dataKey="chartsAudited" name="Charts Audited" fill="#1f9254" radius={[4, 4, 0, 0]} maxBarSize={22} />
-            <Bar dataKey="pendingQueue" name="Pending Queue" fill="#eba91f" radius={[4, 4, 0, 0]} maxBarSize={22} />
+            <Tooltip
+              cursor={{ fill: "var(--color-neutral-soft)" }}
+              contentStyle={{ borderRadius: 12, border: "1px solid var(--color-border-soft)", fontSize: 12 }}
+              formatter={(value) => [`${Number(value ?? 0).toLocaleString()} charts`, ""]}
+            />
+            <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={110}>
+              {barData.map((entry) => (
+                <Cell key={entry.name} fill={entry.fill} />
+              ))}
+              <LabelList dataKey="value" position="top" style={{ fontSize: 13, fontWeight: 600, fill: "var(--color-ink)" }} />
+            </Bar>
           </BarChart>
         </ResponsiveContainer>
       </div>
 
-      <div className="mt-5 grid grid-cols-1 gap-4 border-t border-[var(--color-border-soft)] pt-4 text-sm sm:grid-cols-3">
-        <div>
-          <p className="text-[var(--color-ink-muted)]">Avg Daily Audited</p>
-          <p className="mt-0.5 text-lg font-semibold text-[var(--color-ink)]">{avgDailyAudited} charts</p>
-        </div>
+      <div className="mt-5 grid grid-cols-1 gap-4 border-t border-[var(--color-border-soft)] pt-4 text-sm sm:grid-cols-2">
         <div>
           <p className="text-[var(--color-ink-muted)]">Best Quality Day</p>
           <p className="mt-0.5 text-lg font-semibold text-[var(--color-success)]">
-            {bestDay ? `${FULL_DAY_NAME[bestDay.day] ?? bestDay.day} (${bestDay.passRate}%)` : "—"}
+            {bestDay
+              ? `${FULL_DAY_NAME[bestDay.day] ?? bestDay.day}${bestDay.label ? `, ${bestDay.label}` : ""} (${bestDay.passRate}%)`
+              : "—"}
           </p>
         </div>
         <div>

@@ -91,4 +91,10 @@ export interface DateFilterOption {
   label: string;
 }
 
+/** Inclusive custom date range, ISO yyyy-mm-dd, used when DateFilterKey is "custom". */
+export interface CustomRange {
+  start: string;
+  end: string;
+}
+
 export type DashboardTab = "operations" | "quality";

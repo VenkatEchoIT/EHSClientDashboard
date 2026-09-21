@@ -19,7 +19,7 @@ export function QualitySectionCard({
 }: QualitySectionCardProps) {
   return (
     <section
-      className={`rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] p-6 shadow-[0_2px_8px_rgba(36,33,29,0.10)] ${className}`}
+      className={`rounded-2xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] p-6 ${className}`}
     >
         <div className="flex items-start justify-between gap-3">
           <div>

@@ -1,6 +1,10 @@
 import { RefreshCw, Upload } from "lucide-react";
 import { useState } from "react";
-import type { CustomRange, DashboardTab, DateFilterKey } from "../../types/operations";
+import type {
+  CustomRange,
+  DashboardTab,
+  DateFilterKey,
+} from "../../types/operations";
 import { DashboardTabs } from "./DashboardTabs";
 import { DateFilters } from "./DateFilters";
 
@@ -13,7 +17,13 @@ interface OperationsHeaderProps {
   onTabChange: (tab: DashboardTab) => void;
 }
 
-const HEADER_COPY: Record<DashboardTab, { title: string; subtitle: string }> = {
+const HEADER_COPY: Record<
+  DashboardTab,
+  {
+    title: string;
+    subtitle: string;
+  }
+> = {
   operations: {
     title: "Operations",
     subtitle: "Real-time overview of coding workflow and productivity",
@@ -35,10 +45,12 @@ export function OperationsHeader({
   const [lastUpdated, setLastUpdated] = useState("2 min ago");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [exportMessage, setExportMessage] = useState<string | null>(null);
+
   const copy = HEADER_COPY[tab];
 
   function handleRefresh() {
     setIsRefreshing(true);
+
     window.setTimeout(() => {
       setLastUpdated("just now");
       setIsRefreshing(false);
@@ -47,31 +59,119 @@ export function OperationsHeader({
 
   function handleExport() {
     setExportMessage("Export started");
-    window.setTimeout(() => setExportMessage(null), 2200);
+
+    window.setTimeout(() => {
+      setExportMessage(null);
+    }, 2200);
   }
 
   return (
-    <div className="rounded-3xl border border-[var(--color-border-soft)] bg-[var(--color-surface-tint)] px-4 py-4 sm:px-6 sm:py-5 lg:px-7 lg:py-6">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-        <div>
-          <p className="text-sm font-medium text-ink-soft sm:text-base">Client Name</p>
-          <p className="text-sm text-ink-muted sm:text-base">Multi-specialty – Inpatient &amp; Outpatient coding</p>
-          <h1 className="mt-3 text-2xl font-semibold tracking-tight text-ink sm:text-[28px]">{copy.title}</h1>
-          <p className="text-sm text-ink-soft sm:text-base">{copy.subtitle}</p>
+    <div
+      className="
+        w-full
+        min-w-0
+        rounded-3xl
+        border
+        border-[var(--color-border-soft)]
+        bg-[var(--color-surface-tint)]
+        px-4
+        py-4
+        sm:px-6
+        sm:py-5
+        lg:px-7
+        lg:py-6
+      "
+    >
+
+      <div
+        className="
+          flex
+          min-w-0
+          flex-col
+          gap-4
+          sm:flex-row
+          sm:items-start
+          sm:justify-between
+        "
+      >
+        <div className="min-w-0 flex-1">
+          <p className="text-sm font-medium text-ink-soft sm:text-base">
+            Client Name
+          </p>
+
+          <p className="text-sm text-ink-muted sm:text-base">
+            Multi-specialty – Inpatient &amp; Outpatient coding
+          </p>
+
+          <h1
+            className="
+              mt-3
+              text-2xl
+              font-semibold
+              tracking-tight
+              text-ink
+              sm:text-[28px]
+            "
+          >
+            {copy.title}
+          </h1>
+
+          <p className="text-sm text-ink-soft sm:text-base">
+            {copy.subtitle}
+          </p>
         </div>
 
-        <div className="flex w-full items-center justify-end gap-2 sm:w-auto sm:justify-start sm:gap-3">
-          <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-ink-soft)] sm:text-sm">
-            <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" aria-hidden="true" />
-            Last updated: {lastUpdated}
-          </span>
+        <div
+          className="
+            flex
+            w-full
+            min-w-0
+            flex-wrap
+            items-center
+            gap-2
+            sm:w-auto
+            sm:flex-nowrap
+            sm:justify-end
+            sm:gap-3
+          "
+        >
+          {/* Last Updated */}
+          <div
+            className="
+              flex
+              min-w-0
+              items-center
+              gap-1.5
+              text-xs
+              text-[var(--color-ink-soft)]
+              sm:text-sm
+            "
+          >
+            <span
+              className="
+                h-2
+                w-2
+                shrink-0
+                rounded-full
+                bg-[var(--color-success)]
+              "
+              aria-hidden="true"
+            />
+
+            <span className="whitespace-nowrap">
+              Last updated: {lastUpdated}
+            </span>
+          </div>
+
+          {/* Refresh Button */}
           <button
             type="button"
             onClick={handleRefresh}
             aria-label="Refresh dashboard data"
             className="
               inline-flex
-              h-10 w-10
+              h-10
+              w-10
               shrink-0
               items-center
               justify-center
@@ -86,29 +186,80 @@ export function OperationsHeader({
               focus-visible:outline-2
               focus-visible:outline-offset-2
               focus-visible:outline-[var(--color-accent)]
-              sm:h-9 sm:w-9
+              sm:h-9
+              sm:w-9
             "
           >
             <RefreshCw
-              className={`h-4 w-4 sm:h-[18px] sm:w-[18px] ${
-                isRefreshing ? "animate-spin" : ""
-              }`}
+              className={`
+                h-4
+                w-4
+                sm:h-[18px]
+                sm:w-[18px]
+                ${isRefreshing ? "animate-spin" : ""}
+              `}
               aria-hidden="true"
             />
           </button>
-          <div className="relative">
+
+          {/* Export */}
+          <div className="relative shrink-0">
             <button
               type="button"
               onClick={handleExport}
-              className="inline-flex items-center gap-1.5 rounded-xl border border-[var(--color-border-soft)] bg-[var(--color-surface)] px-3 py-2 text-sm font-medium text-ink-soft hover:bg-[var(--color-neutral-soft)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] sm:gap-2 sm:px-4 sm:text-base"
+              className="
+                inline-flex
+                items-center
+                gap-1.5
+                whitespace-nowrap
+                rounded-xl
+                border
+                border-[var(--color-border-soft)]
+                bg-[var(--color-surface)]
+                px-3
+                py-2
+                text-sm
+                font-medium
+                text-ink-soft
+                transition-colors
+                hover:bg-[var(--color-neutral-soft)]
+                focus-visible:outline
+                focus-visible:outline-2
+                focus-visible:outline-offset-2
+                focus-visible:outline-[var(--color-accent)]
+                sm:gap-2
+                sm:px-4
+                sm:text-base
+              "
             >
               Export
-              <Upload className="h-4 w-4" strokeWidth={2} aria-hidden="true" />
+
+              <Upload
+                className="h-4 w-4 shrink-0"
+                strokeWidth={2}
+                aria-hidden="true"
+              />
             </button>
+
+            {/* Export Message */}
             {exportMessage && (
               <span
                 role="status"
-                className="absolute right-0 top-full mt-2 whitespace-nowrap rounded-lg bg-[var(--color-ink)] px-3 py-1.5 text-xs text-white shadow-lg"
+                className="
+                  absolute
+                  right-0
+                  top-full
+                  z-20
+                  mt-2
+                  whitespace-nowrap
+                  rounded-lg
+                  bg-[var(--color-ink)]
+                  px-3
+                  py-1.5
+                  text-xs
+                  text-white
+                  shadow-lg
+                "
               >
                 {exportMessage}
               </span>
@@ -117,14 +268,31 @@ export function OperationsHeader({
         </div>
       </div>
 
-      <div className="mt-4 flex flex-col gap-3 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
+      <div
+        className="
+          mt-4
+          flex
+          min-w-0
+          flex-col
+          gap-3
+          sm:mt-5
+          sm:flex-row
+          sm:flex-wrap
+          sm:items-center
+          sm:justify-between
+        "
+      >
         <DateFilters
           selected={dateFilter}
           onSelect={onDateFilterChange}
           customRange={customRange}
           onCustomRangeChange={onCustomRangeChange}
         />
-        <DashboardTabs selected={tab} onSelect={onTabChange} />
+
+        <DashboardTabs
+          selected={tab}
+          onSelect={onTabChange}
+        />
       </div>
     </div>
   );

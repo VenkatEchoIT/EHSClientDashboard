@@ -2,24 +2,16 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
+  Cell,
   LabelList,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
-import { getDailyThroughputData } from "../../services/operationsService";
+import { getDailyThroughputData, getThroughputMeta } from "../../services/operationsService";
 import type { CustomRange, DateFilterKey } from "../../types/operations";
 import { SectionCard } from "./SectionCard";
-
-function LegendDot({ color, label }: { color: string; label: string }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 text-sm text-[var(--color-ink-soft)]">
-      <span className="h-2.5 w-2.5 rounded-sm" style={{ backgroundColor: color }} aria-hidden="true" />
-      {label}
-    </span>
-  );
-}
 
 interface DailyThroughputProps {
   dateFilter: DateFilterKey;
@@ -28,48 +20,40 @@ interface DailyThroughputProps {
 
 export function DailyThroughput({ dateFilter, customRange }: DailyThroughputProps) {
   const dailyThroughputData = getDailyThroughputData(dateFilter, customRange);
-  const chartData = dailyThroughputData.map((point) => ({
-    ...point,
-    label: `${point.day} ${point.date}`,
-  }));
+  const meta = getThroughputMeta(dateFilter, customRange);
+
+  // The chart itself just shows the two window totals rather than a bar per
+  // day/hour — with 30+ days plotted, the x-axis labels overlapped and became
+  // unreadable, and a day-by-day view wasn't the point of this card anyway.
+  const totalReceived = dailyThroughputData.reduce((sum, p) => sum + p.received, 0);
+  const totalCompleted = dailyThroughputData.reduce((sum, p) => sum + p.completed, 0);
+  const barData = [
+    { name: "Avg Charts Received", value: totalReceived, fill: "#e8631f" },
+    { name: "Avg Charts Completed", value: totalCompleted, fill: "#eba91f" },
+  ];
+
+  const title =
+    meta.granularity === "hour" ? "Hourly Throughput" : meta.granularity === "week" ? "Weekly Throughput" : "Average Daily Throughput";
+  const subtitle = `Total charts received and completed · ${meta.rangeLabel}`;
 
   return (
-    <SectionCard
-  title={dateFilter === "today" ? "Hourly Throughput" : "Daily Throughput"}
-  subtitle={dateFilter === "today" ? "Charts received and completed per hour" : "Charts received and completed per day"}
-  className="[&>div:first-of-type]:flex-col sm:[&>div:first-of-type]:flex-row [&>div:first-of-type>div:first-child]:w-full [&>div:first-of-type>div:first-child]:flex-1"
-  action={
-    <div className="flex w-full items-center justify-end gap-4 sm:w-auto">
-      <LegendDot color="#e8631f" label="Received" />
-      <LegendDot color="#eba91f" label="Completed" />
-    </div>
-  }
->
-
-      <div className="h-72 w-full" role="img" aria-label="Bar chart of charts received and completed per day">
+    <SectionCard title={title} subtitle={subtitle}>
+      <div className="h-72 w-full" role="img" aria-label={`Bar chart of total charts received vs completed for ${meta.rangeLabel}`}>
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={chartData} margin={{ top: 20, right: 8, left: -12, bottom: 0 }} barGap={6}>
+          <BarChart data={barData} margin={{ top: 20, right: 8, left: -12, bottom: 0 }}>
             <CartesianGrid vertical={false} stroke="var(--color-border-soft)" />
-            <XAxis
-              dataKey="label"
-              tickLine={false}
-              axisLine={false}
-              tick={{ fontSize: 12, fill: "var(--color-ink-muted)" }}
-            />
+            <XAxis dataKey="name" tickLine={false} axisLine={false} tick={{ fontSize: 13, fill: "var(--color-ink-muted)" }} />
             <YAxis tickLine={false} axisLine={false} tick={{ fontSize: 12, fill: "var(--color-ink-muted)" }} />
             <Tooltip
               cursor={{ fill: "var(--color-neutral-soft)" }}
-              contentStyle={{
-                borderRadius: 12,
-                border: "1px solid var(--color-border-soft)",
-                fontSize: 12,
-              }}
+              contentStyle={{ borderRadius: 12, border: "1px solid var(--color-border-soft)", fontSize: 12 }}
+              formatter={(value) => [`${Number(value ?? 0).toLocaleString()} charts`, ""]}
             />
-            <Bar dataKey="received" name="Received" fill="#e8631f" radius={[4, 4, 0, 0]} maxBarSize={22}>
-              <LabelList dataKey="received" position="top" style={{ fontSize: 11, fill: "var(--color-ink-soft)" }} />
-            </Bar>
-            <Bar dataKey="completed" name="Completed" fill="#eba91f" radius={[4, 4, 0, 0]} maxBarSize={22}>
-              <LabelList dataKey="completed" position="top" style={{ fontSize: 11, fill: "var(--color-ink-soft)" }} />
+            <Bar dataKey="value" radius={[6, 6, 0, 0]} maxBarSize={110}>
+              {barData.map((entry) => (
+                <Cell key={entry.name} fill={entry.fill} />
+              ))}
+              <LabelList dataKey="value" position="top" style={{ fontSize: 13, fontWeight: 600, fill: "var(--color-ink)" }} />
             </Bar>
           </BarChart>
         </ResponsiveContainer>

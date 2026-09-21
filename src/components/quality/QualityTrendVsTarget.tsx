@@ -10,21 +10,28 @@ import {
 } from "recharts";
 
 import { useQualityPerformance } from "../../context/QualityPerformanceContext";
-import { getQualityTrendAnchors } from "../../data/dashboardData";
 import { QualitySectionCard } from "../quality/QualitySectionCard";
+
+/** Evenly samples up to `count` points from the filtered window, always keeping the first and last day. */
+function sampleEvenly<T>(items: T[], count: number): T[] {
+  if (items.length <= count) return items;
+  const step = (items.length - 1) / (count - 1);
+  const picked: T[] = [];
+  for (let i = 0; i < count; i++) picked.push(items[Math.round(i * step)]);
+  return picked;
+}
 
 export function QualityTrendVsTarget() {
   const { dailyMetrics } = useQualityPerformance();
 
-  const anchors = getQualityTrendAnchors();
-  const anchorLabels = new Set(anchors.map((a) => a.label));
-
-  const chartData = dailyMetrics
-    .filter((m) => anchorLabels.has(m.label))
-    .map((m) => ({
-      label: m.label,
-      quality: m.passRate,
-    }));
+  // This chart used to plot only days whose label matched a hard-coded anchor
+  // list (Jul 29 ... Sep 9). Any filter that didn't include those exact dates --
+  // every custom range, "Today", "7d" -- rendered an empty or near-empty line.
+  // It now samples the filtered window itself, so it always tracks the filter.
+  const chartData = sampleEvenly(dailyMetrics, 7).map((m) => ({
+    label: m.label,
+    quality: m.passRate,
+  }));
 
   const lastValue = chartData[chartData.length - 1]?.quality;
 

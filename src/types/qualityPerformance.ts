@@ -51,6 +51,8 @@ export interface DailyMetric {
 
 export interface WeekdayThroughput {
   day: string;
+  date: string; // ISO date, e.g. "2026-09-10"
+  label: string; // display date, e.g. "Sep 10"
   chartsAudited: number;
   pendingQueue: number;
   passRate: number;
