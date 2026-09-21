@@ -99,7 +99,6 @@ function loadOrSeed<T>(key: string, seed: () => T): T {
   return fresh;
 }
 
-/** Persists an edited value (add/update/delete), tagged against the current seed so it survives reloads until the mock data itself changes. */
 function persist<T>(key: string, value: T, seed: () => T) {
   writeCache(key, value, hashValue(seed()));
 }
@@ -139,29 +138,13 @@ export function saveCurrentQueue(data: CurrentQueueSnapshot) {
   persist(STORAGE_KEYS.currentQueue, data, buildCurrentQueue);
 }
 
-// ---------------------------------------------------------------------------
-// Audit Throughput card ("Audit Throughput & Backlog" chart + Current Audit
-// Queue stat). The base rows above are a fixed weekday anchor; these two
-// derive the window-specific view the same way computeKPIs/computeSpecialtyStats
-// do, so the chart and the "Current Audit Queue" figure actually move when the
-// date filter changes instead of always showing the seeded snapshot.
-// ---------------------------------------------------------------------------
 export interface ThroughputWindow {
-  /** Every day in the active window (used only to find the best pass-rate day). */
   series: WeekdayThroughput[];
-  /** Window totals — what the 2-bar chart plots. */
   totalAudited: number;
   totalPending: number;
   bestDay: WeekdayThroughput | null;
 }
 
-/**
- * Full-window audit throughput, used for the "Audit Throughput & Backlog"
- * card. The card itself now plots just two bars (total Charts Audited vs
- * total Pending Queue across the whole selected range, same treatment as the
- * Operations Daily Throughput card), so per-day figures are only needed here
- * to work out the best pass-rate day.
- */
 export function computeThroughputWindow(
   base: WeekdayThroughput[],
   dateFilter: DateFilterKey,
@@ -208,9 +191,6 @@ export function computeCurrentQueue(
   return { charts, turnaroundDays };
 }
 
-// ---------------------------------------------------------------------------
-// CRUD helpers for audit records (used by the "View All" management surface).
-// ---------------------------------------------------------------------------
 export function addAuditRecord(records: AuditRecord[], record: AuditRecord): AuditRecord[] {
   const next = [...records, record];
   saveAuditRecords(next);
@@ -243,18 +223,6 @@ export function deleteCoder(coders: CoderRecord[], id: string): CoderRecord[] {
   return next;
 }
 
-// ---------------------------------------------------------------------------
-// Date-filter windowing. Records don't carry per-chart dates (they're specialty
-// rollups), so the date filter scales the underlying totals the same way the
-// Operations tab's filter narrows its own window — a smaller window means a
-// smaller, proportionally consistent slice of the same activity.
-// ---------------------------------------------------------------------------
-/**
- * Both tabs now resolve a filter through the shared resolveDateWindow(), so
- * "This month" means month-to-date here as well (it used to mean 90 days on
- * this tab only), and a custom range means the days that were actually picked
- * rather than "the same number of days, counted back from today".
- */
 function windowFor(dateFilter: DateFilterKey, customRange?: CustomRange): ResolvedWindow {
   return resolveDateWindow(dateFilter, customRange);
 }
@@ -277,15 +245,6 @@ function randomForWindow(dateFilter: DateFilterKey, customRange?: CustomRange, s
   return randomForResolvedWindow(windowFor(dateFilter, customRange), salt);
 }
 
-// ---------------------------------------------------------------------------
-// Daily metrics windowing.
-//
-// The old version sliced the *tail* of the seeded series for every filter, so
-// picking a range in the past (say Jun 1 - Jun 25) still rendered late-August
-// days. Now the seeded series is filtered by real date when the window overlaps
-// it, and any day the seed doesn't cover is generated deterministically from
-// the seeded profile -- so the charts always show the dates on the filter chip.
-// ---------------------------------------------------------------------------
 function categoryFor(passRate: number): DailyMetric["category"] {
   if (passRate >= 95) return "at-above";
   if (passRate >= 90) return "slightly-below";
@@ -338,7 +297,6 @@ export function filterDailyMetrics(
   });
 }
 
-/** Keeps the legacy behaviour available for anything that only wants real, seeded days. */
 export function seededDailyMetricsInWindow(
   metrics: DailyMetric[],
   dateFilter: DateFilterKey,
@@ -353,10 +311,6 @@ export function seededDailyMetricsInWindow(
 
 export function computeKPIs(records: AuditRecord[], dateFilter: DateFilterKey, customRange?: CustomRange): QualityKPIs {
   const scale = scaleForWindow(dateFilter, customRange);
-  // Same seeded-jitter approach as computeSpecialtyStats/computeTopPerformers below,
-  // so the rate-based KPIs (which aren't already moved by `scale`, since they're
-  // ratios rather than totals) still read as a fresh snapshot per window instead
-  // of freezing at the same figure for every date filter.
   const random = randomForWindow(dateFilter, customRange, "kpis");
   const rateJitter = (random() - 0.5) * 1.6;
   const totals = records.reduce(
@@ -391,8 +345,6 @@ export function computeKPIs(records: AuditRecord[], dateFilter: DateFilterKey, c
     ? Number(Math.max(0, totals.weightedAuditTime / totals.charts + rateJitter * 0.05).toFixed(1))
     : 0;
 
-  // "Previous period" comparisons: a stable synthetic baseline derived from the
-  // current totals plus the known trend deltas shown across the reference cards.
   return {
     passRate,
     firstPassAccuracy,

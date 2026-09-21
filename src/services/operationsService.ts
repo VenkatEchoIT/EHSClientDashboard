@@ -40,11 +40,6 @@ export function getDailyThroughputData(dateFilter: DateFilterKey, customRange?: 
   return getSnapshot(dateFilter, customRange).dailyThroughputData;
 }
 
-/**
- * Describes the throughput series so the card can title itself honestly:
- * hourly for a single day, daily for normal windows, weekly once a custom
- * range is long enough that daily bars would be unreadable.
- */
 export function getThroughputMeta(dateFilter: DateFilterKey, customRange?: CustomRange) {
   const snapshot = getSnapshot(dateFilter, customRange);
   const window = resolveDateWindow(dateFilter, customRange);

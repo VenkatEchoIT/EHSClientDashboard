@@ -20,19 +20,6 @@ import {
 } from "../lib/dateWindow";
 import type { OperationsSnapshot } from "./dashboardData";
 
-/**
- * Builds an Operations snapshot for an arbitrary date window (used by the
- * custom range picker). Everything is derived from the hand-written 30-day
- * snapshot's *shape* — daily volume profile, weekend dip, completion ratio,
- * stage mix — then re-generated across the days the user actually picked, with
- * a PRNG seeded on the window so results are stable across re-renders.
- *
- * The important part: every card reads from the same generated series, so the
- * Daily Throughput bars, the KPI totals, Peak Day, Avg Daily Completed and the
- * capacity denominator can no longer disagree with each other or with the
- * dates shown in the filter chip.
- */
-
 interface DailyProfile {
   weekdayReceived: number;
   weekendReceived: number;

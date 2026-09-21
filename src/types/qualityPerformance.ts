@@ -11,7 +11,6 @@ export type RejectionReason =
 
 export type AccuracyCategory = "at-above" | "slightly-below" | "well-below";
 
-/** A batch of audit activity for one specialty over the active reporting window. */
 export interface AuditRecord {
   id: string;
   specialty: Specialty;
@@ -28,7 +27,6 @@ export interface AuditRecord {
   reasonBreakdown: Record<RejectionReason, number>;
 }
 
-/** One coder on the roster, used for the accuracy distribution and top performers. */
 export interface CoderRecord {
   id: string;
   name: string;
@@ -39,7 +37,6 @@ export interface CoderRecord {
   trend: number[];
 }
 
-/** One calendar day's audit throughput/accuracy, used for trend + scatter charts. */
 export interface DailyMetric {
   date: string; // ISO yyyy-mm-dd
   label: string; // e.g. "Sep 9"

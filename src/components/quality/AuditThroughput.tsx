@@ -16,9 +16,6 @@ export function AuditThroughput() {
   const { throughputWindow, currentQueue } = useQualityPerformance();
   const { totalAudited, totalPending, bestDay } = throughputWindow;
 
-  // Same treatment as the Operations Daily Throughput card: just the two
-  // window totals rather than a bar per day, so the chart stays readable
-  // regardless of how many days are in the selected range.
   const barData = [
     { name: "Avg Charts Audited", value: totalAudited, fill: "#1f9254" },
     { name: "Pending Queue", value: totalPending, fill: "#eba91f" },

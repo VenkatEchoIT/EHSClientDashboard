@@ -22,9 +22,6 @@ export function DailyThroughput({ dateFilter, customRange }: DailyThroughputProp
   const dailyThroughputData = getDailyThroughputData(dateFilter, customRange);
   const meta = getThroughputMeta(dateFilter, customRange);
 
-  // The chart itself just shows the two window totals rather than a bar per
-  // day/hour — with 30+ days plotted, the x-axis labels overlapped and became
-  // unreadable, and a day-by-day view wasn't the point of this card anyway.
   const totalReceived = dailyThroughputData.reduce((sum, p) => sum + p.received, 0);
   const totalCompleted = dailyThroughputData.reduce((sum, p) => sum + p.completed, 0);
   const barData = [

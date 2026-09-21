@@ -1,27 +1,8 @@
 import type { CustomRange, DateFilterKey } from "../types/operations";
 
-/**
- * Shared date-window resolution for BOTH dashboard tabs.
- *
- * Previously each tab had its own idea of what a filter meant:
- *   - Operations ignored `customRange` completely and fell back to the 30d
- *     snapshot, so picking "Jun 1 – Jun 25" still rendered the Aug 19 – Sep 17
- *     bars in Daily Throughput (and the Peak Day / KPI figures that go with it).
- *   - Quality only used the *length* of the custom range and then sliced the
- *     tail of the seeded series, so a June range showed late-August days.
- *   - "This month" meant 90 days on the Quality tab but month-to-date on
- *     Operations.
- *
- * Everything now goes through resolveDateWindow(), so a filter resolves to one
- * concrete [start, end] pair that every card renders against.
- */
-
 export interface ResolvedWindow {
-  /** Inclusive first day of the window (local midnight). */
   start: Date;
-  /** Inclusive last day of the window (local midnight). */
   end: Date;
-  /** Inclusive day count, i.e. Jun 1 → Jun 25 is 25. */
   days: number;
 }
 
@@ -56,13 +37,11 @@ export function toISODate(date: Date): string {
   return `${date.getFullYear()}-${month}-${day}`;
 }
 
-/** "Aug 19" — the padded form used by the Operations throughput axis. */
 export function formatMonthDayPadded(date: Date): string {
   const month = date.toLocaleDateString("en-US", { month: "short" });
   return `${month} ${`${date.getDate()}`.padStart(2, "0")}`;
 }
 
-/** "Aug 9" — the unpadded form used by the Quality labels. */
 export function formatMonthDay(date: Date): string {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
 }
@@ -80,7 +59,6 @@ function clampRangeDays(days: number): number {
   return Math.max(1, Math.min(MAX_WINDOW_DAYS, days));
 }
 
-/** Resolves a filter (+ optional picked range) into one concrete inclusive window. */
 export function resolveDateWindow(
   dateFilter: DateFilterKey,
   customRange?: CustomRange,
@@ -139,11 +117,6 @@ export function windowKey(window: ResolvedWindow): string {
   return `${toISODate(window.start)}_${toISODate(window.end)}`;
 }
 
-// ---------------------------------------------------------------------------
-// Deterministic PRNG: the same window always produces the same numbers, so the
-// dashboard doesn't reshuffle on every re-render, but different windows get
-// genuinely different data.
-// ---------------------------------------------------------------------------
 export function hashString(value: string): number {
   let hash = 0;
   for (let i = 0; i < value.length; i++) {
